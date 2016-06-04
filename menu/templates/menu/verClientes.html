@@ -1,0 +1,14 @@
+{% extends 'menu/layoutBootstrap.html' %}
+
+{% block main %}
+    {% if lista_usuarios %}
+        {% for u in lista_usuarios %}
+            <p>Usuario: {{ u.pseudonimo }}</p>
+            <p>e-mail: {{ u.email }}</p>
+            <p>Contrasenia: {{ u.passwd }}</p>
+            <br/>
+        {% endfor %}
+    {% else %}
+        <p> No hay usuarios registados.</p>
+    {% endif %}
+{% endblock %}

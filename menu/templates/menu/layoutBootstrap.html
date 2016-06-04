@@ -1,0 +1,79 @@
+<html>
+{% block script %}
+    {% endblock %}
+
+<head>
+    {# Vergas para que muestre acentos y se adapte a movil #}
+    <meta charset = "utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {# Vergas de bootstrap #}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    {# Vergas de nuestro CSS #}
+    {% block stylesheets %}
+        {% load staticfiles %}
+        <link rel = "stylesheet" type ="text/css" href="{% static 'menu/layout.css' %}" />
+    {% endblock %}
+</head>
+{%block body-tag%}
+
+<body>
+{%endblock%}
+    {# Barra de navegacion #}
+    <nav class = "navbar navbar-inverse">
+        {# Boton de PangoExpress #}
+        <div class = "navbar-header">
+            <a class = "navbar-brand" href = "{% url 'menu:index' %}"> PangoExpress </a>
+        </div>
+
+        {# Contenedor para la lista de elementos de la barra #}
+        <div class = "collapse navbar-collapse" id = "topNavBar">
+
+            {# Elementos en la lista #}
+            <ul class = "nav navbar-nav">
+                {# Ver Menu #}
+                <li> <a href = "{% url 'menu:menu' %}"> Menu </a></li>
+                {# Usuarios logeados #}
+                {% if request.session.logged %}
+                    {# Ver Pedido #}
+                    <li> <a href = "#"> Pedido </a></li>
+                    {# Ver Perfil #}
+                    <li> <a href = "{% url 'menu:perfil' %}"> Perfil </a></li>
+                {% endif %}
+            </ul>
+
+            {# Elementos alineados a la derecha #}
+            <ul class = "nav navbar-nav navbar-right">
+                {# Usuarios logeados #}
+                {% if request.session.logged %}
+                    <li> <a href = "{% url 'menu:cerrar_sesion' %}"> Cerrar Sesion </a></li>
+                {# Usuarios sin logear #}
+                {% else %}
+                    <li> <a href = "{% url 'menu:registro' %}"> Registro </a> </li>
+                    <li> <a href = "{% url 'menu:iniciar_sesion' %}"> Iniciar Sesion </a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav> {# Finaliza la barra de navegacion #}
+
+    {# Seccion 'main' donde va el contenido de la pagina #}
+    <section id = "main">
+        {% block main %}
+        {# Display django.contrib.messages as Bootstrap alerts #}
+        {% bootstrap_messages %}
+        <form method="post" class="form">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          {% buttons %}
+            <button type="submit" class="btn btn-primary"> {% bootstrap_icon "star" %}Submit </button>
+          {% endbuttons %}
+        </form>
+        {% endblock %}
+    </section> {# Finaliza la seccion main #}
+
+</body>
+
+</html>

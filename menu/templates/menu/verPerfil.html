@@ -1,0 +1,33 @@
+{% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
+
+{% block title %}
+{% if pseudonimo %}
+    <title>Perfil {{ pseudonimo }}</title>
+    {% else %}
+    <title>Perfil</title>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+{% if pseudonimo %}
+    <p> Pseudonimo: {{ pseudonimo }}</p>
+    <p> e-mail: {{ email }}</p>
+    <p> Nombre: {{ nombre }}</p>
+
+    {% if apellido %}
+        <p> Apellido: {{ apellido }}</p>
+        <p> CI: {{ ci }}</p>
+        <p> Telefono: {{ telefono }}</p>
+
+    {% else %}
+        <p> RIF: {{ rif }}</p>
+    {% endif %}
+
+    {# Boton de editar perfil #}
+    {% bootstrap_button "Editar" button_class="btn btn-default" href='/menu/perfil/editar' %}
+
+{% else %}
+    <p> Usted no ha iniciado sesion </p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,45 @@
+body{
+	/*background: #d3d3d3 url("images/pangoBackground");*/
+    background: #d3d3d3 url('images/pan.jpg');
+}
+
+header {
+    width: 77%;
+    background: #eadead;
+    margin: auto;       /* Lo centra */
+    margin-top: 3%;
+    padding: 1% 3%;
+    border-radius: 5px;
+}
+
+header h1{
+    text-align: center;
+    font-size: 300%;
+}
+
+section {
+    width: 77%;
+    background: #eadead;
+    margin: auto;
+    margin-top: 2%;
+    border-radius: 5px;
+    padding: 2% 3%;
+}
+
+section h2 {
+    text-align: center;
+}
+
+section ul li {
+    margin: 10px;
+}
+
+
+/*
+section ul li p{
+    float: right;
+}
+
+section ul li a{
+    float: left;
+}*/

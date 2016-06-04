@@ -1,0 +1,123 @@
+﻿
+{%extends 'menu/layoutBootstrap.html'%}
+
+    {% load staticfiles %}
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{%static 'menu/Design.css'%}" />
+    {% endblock %}
+
+    {% block script %}
+    <script type="text/javascript">
+
+
+        var nrImg = 3;  //numero de imagen para el ciclo
+        var IntSeconds = 4;     //segundos entre cada imagen
+
+        function Load()
+        {
+            nrShown = 0;    //the img visible
+            Vect = new Array(nrImg + 10);
+            Vect[0] = document.getElementById("Img1");
+            Vect[0].style.visibility = "visible";
+
+            document.getElementById("S" + 0).style.visibility = "visible";
+
+            for (var i = 1; i < nrImg; i++)
+            {
+                Vect[i] = document.getElementById("Img" + (i + 1));
+                document.getElementById("S" + i).style.visibility = "visible";
+            }
+
+            document.getElementById("S" + 0).style.backgroundColor = "rgba(255, 255, 255, 0.90)";
+            document.getElementById("SP" + nrShown).style.visibility = "visible";
+
+            mytime = setInterval(Timer, IntSeconds * 1000);
+        }
+        function Timer()
+        {
+            nrShown++;
+            if (nrShown == nrImg)
+                nrShown = 0;
+            Effect();
+        }
+        //next img
+        function next()
+        {
+            nrShown++;
+            if (nrShown == nrImg)
+                nrShown = 0;
+            Effect();
+
+            clearInterval(mytime);
+            mytime = setInterval(Timer, IntSeconds * 1000);
+        }
+        function prev()
+        {
+            nrShown--;
+            if (nrShown == -1)
+                nrShown = nrImg -1;
+            Effect();
+
+            clearInterval(mytime);
+            mytime = setInterval(Timer, IntSeconds * 1000);
+        }
+        //here changes the img + effect
+        function Effect()
+        {
+            for (var i = 0; i < nrImg; i++)
+            {
+                Vect[i].style.opacity = "0";   //to add the fade effect
+                Vect[i].style.visibility = "hidden";
+
+                document.getElementById("S" + i).style.backgroundColor = "rgba(0, 0, 0, 0.70)";
+                document.getElementById("SP" + i).style.visibility = "hidden";
+            }
+            Vect[nrShown].style.opacity = "1";
+            Vect[nrShown].style.visibility = "visible";
+            document.getElementById("S" + nrShown).style.backgroundColor = "rgba(255, 255, 255, 0.90)";
+            document.getElementById("SP" + nrShown).style.visibility = "visible";
+        }
+
+    </script>
+    {% endblock %}
+    <title></title>
+
+
+{%block body-tag%}
+<body onload="Load()">
+    {%endblock%}
+    {%block main%}
+    <div id="slider">
+        <div id="imgs">
+            <!-- aqui van las imagenes -->
+
+            <img id="Img3" src="{%static 'menu/images/1.jpg'%}"/>
+            <img id="Img2" src="{%static 'menu/images/3.jpg'%}"/>
+            <img id="Img1" src="{%static 'menu/images/2.jpg'%}"/>
+        </div>
+        <!--aqui estaran los botones a la izquierda y derecha-->
+        <div id="Snav">
+            <!-- los circulos que muestran la imagen actual -->
+            <div id="SnavUp">
+                <div id="Scircles">
+                    <ul>
+                        <!-- aqui van las tag de li-->
+                        <li id="S0"></li>
+                        <li id="S1"></li>
+                        <li id="S2"></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- boton derecho e izquierdo -->
+
+            <!-- la info -->
+            <div id="SnavBottom">
+                <!-- la descripcion de las imagenes-->
+                <p id="SP0">bocadillos</p>
+                <p id="SP1">postres</p>
+                <p id="SP2">ensalada</p>
+            </div>
+        </div>
+    </div>
+{%endblock%}
+

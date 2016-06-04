@@ -1,0 +1,123 @@
+﻿#imgs img 
+{
+    /*overlays all the imgs */
+    /*You see only the first img, for now*/
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:7.7%;
+    left:0;
+    transition: 1s;
+    visibility:hidden;
+    /*we want to show only 1 img at the time*/
+}
+/*the container */
+#Snav 
+{
+    display:block;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:7.7%;
+    left:0;
+}
+/* where the circles are going to be*/
+#SnavUp 
+{
+    display:block;
+    width:100%;
+    height:20%;
+}
+#Scircles 
+{
+    display:block;
+    width:5%;
+    height:15%;
+    margin-right:5%;
+    margin-top:2%;
+    float:right;        /* is going to be on the right side of the slider*/
+}
+#Scircles ul 
+{
+    margin:0;
+    float:right;
+    display:block;
+    width:100%;
+    height:100%;
+}
+#Scircles li
+{
+    /*we don't need the dots*/
+    list-style:none;
+    display:block;
+    background-color:rgba(0, 0, 0, 1);
+    width:25%;
+    height:90%;
+    margin-left:5%;
+    float:left;     /*on the same line*/
+    visibility:hidden;
+    /*we need circles, not squares*/
+    border-bottom-left-radius:25px;
+    border-top-left-radius:25px;
+    border-bottom-right-radius:25px;
+    border-top-right-radius:25px;
+
+}
+/*ok , we are done with the SnavUp*/
+#SnavMiddle 
+{
+    display:block;
+    width:100%;
+    height:15%;
+    margin-top:10%;     /*this is up to you , where you want the buttons*/
+}
+/*left button*/
+#Sleft 
+{
+    width:8%;
+    height:100%;
+    float:left;
+    margin-left:3%;
+    opacity:0.8;
+}
+/*button effect*/
+#Sleft:hover 
+{
+    opacity:0.8;
+}
+#Sright 
+{
+    width:8%;
+    height:100%;
+    float:right;
+    margin-right:3%;
+    opacity:0.8;
+}
+#Sright:hover 
+{
+    opacity:0.8;
+}
+/*now we have to add the info at the bottom of the slider*/
+#SnavBottom 
+{
+    display:block;
+    background-color:rgba(0, 0, 0, 0.8);
+    width:100%;
+    height:10%;
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+#SnavBottom p 
+{
+    font:normal 200% Arial;
+    color:#fff;
+    position:absolute;
+    bottom:0;
+    left:0;
+    margin-left:3%;
+    visibility:hidden;
+}
+
+
+/*that's all , now we need to code the slider, the effect*/

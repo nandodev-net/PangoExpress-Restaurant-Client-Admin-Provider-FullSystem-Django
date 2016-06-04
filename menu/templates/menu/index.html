@@ -1,0 +1,16 @@
+{% extends 'menu/layoutBootstrap.html' %}
+
+{% block main %}
+    <h1>MENU</h1>
+    {% if all_platos %}
+    <ul>
+        {% for plato in all_platos %}
+
+        <li><a href="{% url 'menu:detail' plato.id %}">{{plato.nombre}}</a></li>
+        {% endfor  %}
+    </ul>
+
+    {% else %}
+        <h3>Sin disponibilidad de menu</h3>
+    {% endif %}
+{% endblock %}

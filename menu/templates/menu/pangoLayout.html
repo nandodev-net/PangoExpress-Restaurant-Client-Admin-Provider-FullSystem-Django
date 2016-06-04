@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    {% block stylesheets %}
+    {% load staticfiles %}
+    <link rel = "stylesheet" type ="text/css" href="{% static 'menu/layout.css' %}" />
+    {% endblock %}
+
+    {% block title %}
+    <title>Pango Express</title>
+    {% endblock %}
+</head>
+
+<body>
+
+    <header>
+        <h1> Pango Express </h1>
+    </header>
+
+    <aside></aside>
+
+    <section>
+        {% block main %}
+        {% endblock %}
+    </section>
+
+
+    <aside></aside>
+
+</body>
+</html>

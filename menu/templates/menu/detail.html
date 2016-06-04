@@ -1,0 +1,10 @@
+{% extends 'menu/layoutBootstrap.html' %}
+
+
+{% block main %}
+    <h1> {{plato.nombre}} </h1>
+    <img src = "{{plato.path_img}}">
+    <h4>{{plato.precio}} BsF.</h4>
+    <h3> Descripcion: </h3>
+    <h4>{{ plato.descripcion }}</h4>
+{% endblock %}
