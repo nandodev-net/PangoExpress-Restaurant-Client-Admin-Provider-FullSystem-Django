@@ -83,7 +83,7 @@ class PLATO(models.Model):
 	precio = models.FloatField()
 	#path_img = models.FileField(max_length=500, null = True)
 	#  ^-- Esto es raro pal cono
-	path_img = models.CharField(max_length=500, null = True)
+	path_img = models.FileField()
 	descripcion = models.CharField(max_length = 500)
 
 	class Meta:
