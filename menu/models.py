@@ -15,7 +15,7 @@ class INTERES_PERFIL(models.Model):
 	interes = models.CharField(max_length=50)
 	
 class USUARIO(models.Model):
-	email = models.CharField(max_length=200, primary_key=True, unique = True)
+	email = models.EmailField(max_length=200, primary_key=True, unique = True)
 	contrasenia = models.CharField(max_length=50)
 	es_cliente = models.BooleanField(default = False)
 	perfil = models.ForeignKey(PERFIL)
@@ -34,6 +34,7 @@ class CLIENTE(models.Model):
 	nombre = models.CharField(max_length=50)
 	apellido = models.CharField(max_length=50)
 	telefono = models.CharField(max_length=50)
+	#fechaNacimiento = models.DateField(null = False)
 	billetera = models.ForeignKey(BILLETERA, null = True)
 
 	def __str__(self):

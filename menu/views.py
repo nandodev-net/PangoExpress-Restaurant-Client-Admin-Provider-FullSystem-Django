@@ -93,10 +93,11 @@ class FormularioRegistroCliente(View):
 						nombre=form.cleaned_data['nombre'],
 						apellido=form.cleaned_data['apellido'],
 						telefono=form.cleaned_data['telefono'],
+						#fechaNacimiento=form.cleaned_data['fechaNacimiento'],
 						billetera_id=None
 						)
-				cliente.save()
 
+				cliente.save()
 				return redirect('/menu/')
 
 			except IntegrityError:

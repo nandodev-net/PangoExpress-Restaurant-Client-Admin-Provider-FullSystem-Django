@@ -4,9 +4,27 @@
 
 {% block main %}
 <form action = "" method = "post">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% bootstrap_form form2 %}
+	{% csrf_token %}
+	<p>{% bootstrap_label "Pseudónimo" %}
+		<span style="color:red">*<span>
+		{% bootstrap_field form.pseudonimo  show_label=False %}
+	</p> 
+    
+   
+    <p>{% bootstrap_label "Contraseña" %}
+		<span style="color:red">*<span>
+		{% bootstrap_field form2.contrasenia  show_label=False %}
+	</p>
+
+    <p>{% bootstrap_label "Email" %}
+		<span style="color:red">*<span>
+		{% bootstrap_field form2.email  show_label=False %}
+	</p>
+    	
+	<p>{% bootstrap_label "Tipo" %}
+		<span style="color:red">*<span>
+		{% bootstrap_field form2.tipo  show_label=False %}
+	</p>
     <input type = "submit" value = "Continuar"/>
 </form>
 {% endblock %}
