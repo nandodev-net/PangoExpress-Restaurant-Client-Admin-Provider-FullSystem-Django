@@ -70,7 +70,8 @@ class FormularioRegistro(View):
 			# creo que se puede especificar donde ocurrio el error
 			print('Error en formulario\n')
 
-		return redirect('/menu/registro/')
+		#return redirect('/menu/registro/')
+		return render(request, '/menu/registro/',{'form': form})
 
 
 ''' Formularuio de registro de cliente '''
@@ -93,7 +94,7 @@ class FormularioRegistroCliente(View):
 						nombre=form.cleaned_data['nombre'],
 						apellido=form.cleaned_data['apellido'],
 						telefono=form.cleaned_data['telefono'],
-						#fechaNacimiento=form.cleaned_data['fechaNacimiento'],
+						fechaNacimiento=form.cleaned_data['fechaNacimiento'],
 						billetera_id=None
 						)
 
@@ -105,7 +106,9 @@ class FormularioRegistroCliente(View):
 				return redirect('/menu/registro/cliente')
 		else:
 			print('formulario invalido\n')
-			return redirect('/menu/registro/cliente')
+			#return redirect('/menu/registro/cliente')
+			return render(request, 'menu/registroCliente.html',{'form': form})
+
 
 
 ''' Formulario de registro de proveedor'''
@@ -137,6 +140,7 @@ class FormularioRegistroProveedor(View):
 		else:
 			print('formulario invalido\n')
 			return redirect('/menu/registro/proveedor')
+			#return render(request, '/menu/registroProveedor.html',{'form': form})
 
 
 ''' Vista de perfil '''
@@ -156,6 +160,7 @@ def ver_perfil(request):
 			context['apellido'] = extra.apellido
 			context['ci'] = extra.ci
 			context['telefono'] = extra.telefono
+			context['fechaNacimiento'] = extra.fechaNacimiento
 		else:
 			extra = PROVEEDOR.objects.get(usuario=usuario)
 
@@ -166,6 +171,7 @@ def ver_perfil(request):
 		print('no iniciaste perro\n')
 
 	return render(request, 'menu/verPerfil.html', context)
+
 
 
 ''' Edicion de perfil '''
@@ -182,6 +188,7 @@ class EditarPerfil(View):
 			data['nombre'] = cliente.nombre
 			data['apellido'] = cliente.apellido
 			data['telefono'] = cliente.telefono
+			data['fechaNacimiento'] = cliente.fechaNacimiento
 
 			form = FormEditarPerfilCliente(data, instance = cliente)
 		else:
@@ -212,6 +219,8 @@ class EditarPerfil(View):
 					print('Integriry Error\n')
 			else:
 				print('Error en formulario weon\n')
+				
+
 				# cuando encuentra error pasa por aqui, enviar un mensaje
 		else:
 			proveedor = PROVEEDOR.objects.get(usuario = usuario)
@@ -227,8 +236,10 @@ class EditarPerfil(View):
 			else:
 				print('Error en el formulario\n')
 				# cuando falla pasa por aqui, dar mensaje
-
+				
+		#return render(request, 'editarPerfil',{'form': form})
 		return redirect('/menu/perfil')
+		#return render(request, '/menu/perfil',{'form': form})
 
 
 ''' Lista todos los clientes registrados en el sistema '''
@@ -281,9 +292,12 @@ class IniciarSesion(View):
 				request.session['logged'] = False
 				request.session['pid'] = -1
 				return redirect('/menu/iniciarsesion')
+				
 
 		else:
 			print('Error en formulario\n')
+			return render(request, '/menu/iniciarsesion',{'form': form})
+
 
 
 ''' Realiza operaciones necesarias para el cierre de sesion '''

@@ -1,0 +1,13 @@
+{% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
+{# No se por que pero hay que poner esto #}
+
+{% block main %}
+<form action = "" method = "post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% bootstrap_form form2 %}
+    <input type = "submit" value = "Continuar"/>
+</form>
+{% endblock %}
+

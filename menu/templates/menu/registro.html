@@ -5,9 +5,10 @@
 {% block main %}
 <form action = "" method = "post">
 	{% csrf_token %}
-	<p>{% bootstrap_label "Pseudónimo" %}
+	<p>{% bootstrap_label "Pseudónimo" %}		
 		<span style="color:red">*<span>
 		{% bootstrap_field form.pseudonimo  show_label=False %}
+		
 	</p> 
     
    

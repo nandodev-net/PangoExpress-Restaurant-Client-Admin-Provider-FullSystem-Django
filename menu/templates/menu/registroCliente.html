@@ -4,9 +4,11 @@
 {% block main %}
     <form action = "" method = "post">
         {% csrf_token %}
+        
         <p>{% bootstrap_label "Nombres" %}
 			<span style="color:red">*<span>
 			{% bootstrap_field form.nombre  show_label=False %}
+
 		</p> 
 		<p>{% bootstrap_label "Apellidos" %}
 			<span style="color:red">*<span>
@@ -17,7 +19,12 @@
 			{% bootstrap_field form.ci  show_label=False %}
 		</p> 
 		<p>{% bootstrap_label "Telefono" %}
+			<span style="color:red">*<span>
 			{% bootstrap_field form.telefono  show_label=False %}
+		</p>
+		<p>{% bootstrap_label "Fecha de Nacimiento" %}
+			<span style="color:red">*<span>
+			{% bootstrap_field form.fechaNacimiento  show_label=False %}
 		</p>
     
         <input type = "submit" value = "Continuar"/>
