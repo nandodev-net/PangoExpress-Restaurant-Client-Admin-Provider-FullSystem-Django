@@ -1,0 +1,11 @@
+{% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
+
+{% block main %}
+    <h2> Billetera. </h2>
+    <p> Nombre: {{ nombre }}</p>
+    <p> Apellido: {{ apellido }}</p>
+    <h1> Saldo: {{ saldo }}</h1>
+
+    {% bootstrap_button "Recargar" button_class="btn btn-default" href='/menu/perfil/billetera/recargar' %}
+{% endblock %}

@@ -292,6 +292,121 @@ def cerrar_sesion(request):
 	request.session['pid'] = -1
 
 	return redirect('/menu/')
+	
+
+''' Realiza operaciones necesaras para registrar un pedido '''
+def hacer_pedido(request, plato_id):
+    pass
+
+
+''' Crea y asocia a un usuario una billetera electronica '''
+def gestionar_billetera(request):
+    perfil = PERFIL.objects.get(id = request.session['pid'])
+    usuario = USUARIO.objects.get(perfil = perfil)
+    cliente = CLIENTE.objects.get(usuario = usuario)
+
+    if cliente.billetera == None:
+        return redirect('/menu/perfil/billetera/crear')
+
+    else:
+        context = {'nombre': cliente.nombre,
+                   'apellido': cliente.apellido,
+                   'saldo': cliente.billetera.saldo
+                   }
+        return render(request, 'menu/mostrarBilletera.html', context)
+
+
+class CrearBilletera(View):
+    def get(self, request):
+        perfil = PERFIL.objects.get(id=request.session['pid'])
+        usuario = USUARIO.objects.get(perfil=perfil)
+        cliente = CLIENTE.objects.get(usuario=usuario)
+        data = {'nombre' : cliente.nombre,
+                'apellido' : cliente.apellido
+                }
+        form = FormCrearBilletera(data)
+        form.fields['nombre'].widget.attrs['readonly'] = True
+        form.fields['apellido'].widget.attrs['readonly'] = True
+
+        return render(request, 'menu/crearBilletera.html', {'form' : form})
+
+    def post(self, request):
+        perfil = PERFIL.objects.get(id=request.session['pid'])
+        usuario = USUARIO.objects.get(perfil=perfil)
+        cliente = CLIENTE.objects.get(usuario=usuario)
+        form = FormCrearBilletera(request.POST)
+
+        if form.is_valid():
+            try:
+                billetera = BILLETERA(nombre = form.cleaned_data['nombre'],
+                                      apellido = form.cleaned_data['apellido'],
+                                      PIN = form.cleaned_data['PIN'],
+                                      saldo = 0
+                                      )
+                billetera.save()
+                cliente.billetera = billetera
+                cliente.save()
+
+            except IntegrityError:
+                print('Integrity Error\n')
+
+            return redirect('/menu/perfil/billetera/')
+
+        else:
+            print("Error en formulario\n")
+            return redirect('/menu/perfil/billetera/crear/')
+
+
+''' Formulario de recarga, recarga la billetera '''
+class RecargarBilletera(View):
+    def get(self, request):
+        form = FormRecargaBilletera()
+
+        return render(request, 'menu/recargarBilletera.html', {'form' : form })
+
+    def post(self, request):
+        form = FormRecargaBilletera(request.POST)
+
+        if form.is_valid():
+            perfil = PERFIL.objects.get(id=request.session['pid'])
+            usuario = USUARIO.objects.get(perfil=perfil)
+            cliente = CLIENTE.objects.get(usuario=usuario)
+            billetera = BilleteraElectronica(ident=cliente.billetera.id,
+                                             nombres=cliente.billetera.nombre,
+                                             apellidos=cliente.billetera.apellido,
+                                             pin=cliente.billetera.PIN,
+                                             saldoIni=cliente.billetera.saldo
+                                             )
+
+            aux = billetera.recargar(pin=form.cleaned_data['PIN'],
+                                     ident=cliente.billetera.id,
+                                     ano=datetime.datetime.now().year,
+                                     mes=datetime.datetime.now().month,
+                                     dia=datetime.datetime.now().day,
+                                     monto=form.cleaned_data['monto']
+                                     )
+            if(aux == 1):
+                print('Monto invalido')
+            elif(aux == 2):
+                print('Error en la fecha')
+            elif(aux == 3):
+                print('PIN incorrecto')
+            else:
+                try:
+                    cliente.billetera.saldo = billetera.balance
+                    cliente.billetera.save()
+
+                    return redirect('/menu/perfil/billetera/')
+                except IntegrityError:
+                    print("Integrity Error\n")
+
+            print('fallo la recarga')
+            return redirect('/menu/perfil/billetera/recargar/')
+
+        else:
+            print('Eror en el formulario\n')
+            redirect('/menu/perfil/billetera/recargar/')
+
 
 
 ''' Dummy para hacer pruebas con el layout '''
