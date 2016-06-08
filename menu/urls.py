@@ -25,6 +25,15 @@ urlpatterns = [
 
 	#/menu/perfil/editar/
 	url(r'^perfil/editar/$', views.EditarPerfil.as_view(), name = 'editar_perfil'),
+	
+    #/menu/perfil/billetera
+    url(r'^perfil/billetera/$', views.gestionar_billetera, name = 'gestionar_billetera'),
+
+    #/menu/perfil/billetera/crear
+    url(r'^perfil/billetera/crear/$', views.CrearBilletera.as_view(), name = 'crear_billetera'),
+
+    #/menu/perfil/billetera/recargar
+    url(r'^perfil/billetera/recargar/$', views.RecargarBilletera.as_view(), name = 'crear_billetera'),
 
 	#/menu/verclientes/
 	url(r'^verclientes/$', views.ver_clientes, name = 'ver_clientes'),

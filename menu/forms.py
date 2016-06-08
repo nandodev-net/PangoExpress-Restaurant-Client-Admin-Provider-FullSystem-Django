@@ -48,3 +48,14 @@ class FormEditarPerfilProveedor(forms.ModelForm):
 class FormIniciarSesion(forms.Form):
 	pseudonimo = forms.CharField(label='Pseudonimo', max_length = 50)
 	passwd = forms.CharField(label='Constrasena', widget=forms.PasswordInput)
+	
+class FormCrearBilletera(forms.ModelForm):
+    class Meta:
+        model = BILLETERA
+        fields = ['nombre', 'apellido', 'PIN']
+
+class FormRecargaBilletera(forms.Form):
+    PIN = forms.CharField(max_length=50)
+    monto = forms.FloatField(label='Monto')
+    
+    

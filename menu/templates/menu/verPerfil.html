@@ -10,12 +10,12 @@
 {% endblock %}
 
 {% block main %}
-{% if pseudonimo %}
+{% if logged %}
     <p> Pseudonimo: {{ pseudonimo }}</p>
     <p> e-mail: {{ email }}</p>
     <p> Nombre: {{ nombre }}</p>
 
-    {% if apellido %}
+    {% if es_cliente %}
         <p> Apellido: {{ apellido }}</p>
         <p> CI: {{ ci }}</p>
         <p> Telefono: {{ telefono }}</p>
@@ -26,6 +26,11 @@
 
     {# Boton de editar perfil #}
     {% bootstrap_button "Editar" button_class="btn btn-default" href='/menu/perfil/editar' %}
+
+    {# Boton de afiliar billetera #}
+    {% if es_cliente %}
+        {% bootstrap_button "Billetera" button_class="btn btn-default" href='/menu/perfil/billetera' %}
+    {% endif %}
 
 {% else %}
     <p> Usted no ha iniciado sesion </p>
