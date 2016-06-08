@@ -220,6 +220,8 @@ class EditarPerfil(View):
 					print('Integriry Error\n')
 			else:
 				print('Error en formulario weon\n')
+				return(redirect('/menu/perfil/editar'))
+				#return render(request, '/menu/editarPerfil.html',{'form': form})
 				# cuando encuentra error pasa por aqui, enviar un mensaje
 		else:
 			proveedor = PROVEEDOR.objects.get(usuario = usuario)
