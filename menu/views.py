@@ -4,8 +4,7 @@ from django.views.generic import View
 from django.db import IntegrityError
 
 from .forms import *
-from .models import *
-from .BilleteraElectronica import *
+from .models import PERFIL, USUARIO, CLIENTE, PROVEEDOR, PLATO
 
 
 def index(request):
@@ -72,8 +71,8 @@ class FormularioRegistro(View):
 			print('Error en formulario\n')
 
 		#return redirect('/menu/registro/')
-		return render(request, '/menu/registro/',{'form': form})
- 
+		return render(request, 'menu/registro.html',{'form': form, 'form2':form2})
+
 
 ''' Formularuio de registro de cliente '''
 class FormularioRegistroCliente(View):
@@ -95,11 +94,11 @@ class FormularioRegistroCliente(View):
 						nombre=form.cleaned_data['nombre'],
 						apellido=form.cleaned_data['apellido'],
 						telefono=form.cleaned_data['telefono'],
-						billetera_id=None,
-						fechaNacimiento=form.cleaned_data['fechaNacimiento']
+						fechaNacimiento=form.cleaned_data['fechaNacimiento'],
+						billetera_id=None
 						)
-				cliente.save()
 
+				cliente.save()
 				return redirect('/menu/')
 
 			except IntegrityError:
@@ -109,6 +108,7 @@ class FormularioRegistroCliente(View):
 			print('formulario invalido\n')
 			#return redirect('/menu/registro/cliente')
 			return render(request, 'menu/registroCliente.html',{'form': form})
+
 
 
 ''' Formulario de registro de proveedor'''
@@ -140,8 +140,8 @@ class FormularioRegistroProveedor(View):
 		else:
 			print('formulario invalido\n')
 			return redirect('/menu/registro/proveedor')
-#return render(request, '/menu/registroProveedor.html',{'form': form})
- 
+			#return render(request, '/menu/registroProveedor.html',{'form': form})
+
 
 ''' Vista de perfil '''
 def ver_perfil(request):
@@ -175,6 +175,7 @@ def ver_perfil(request):
     return render(request, 'menu/verPerfil.html', context)
 
 
+
 ''' Edicion de perfil '''
 class EditarPerfil(View):
 
@@ -190,7 +191,7 @@ class EditarPerfil(View):
 			data['apellido'] = cliente.apellido
 			data['telefono'] = cliente.telefono
 			data['fechaNacimiento'] = cliente.fechaNacimiento
- 
+
 			form = FormEditarPerfilCliente(data, instance = cliente)
 		else:
 			proveedor = PROVEEDOR.objects.get(usuario = usuario)
@@ -219,9 +220,10 @@ class EditarPerfil(View):
 				except IntegrityError:
 					print('Integriry Error\n')
 			else:
+				return render(request, 'editarPerfil',{'form': form})
 				print('Error en formulario weon\n')
-				return(redirect('/menu/perfil/editar'))
-				#return render(request, '/menu/editarPerfil.html',{'form': form})
+				
+
 				# cuando encuentra error pasa por aqui, enviar un mensaje
 		else:
 			proveedor = PROVEEDOR.objects.get(usuario = usuario)
@@ -235,13 +237,13 @@ class EditarPerfil(View):
 				except IntegrityError:
 					print('Integrity Error\n')
 			else:
+				return render(request, 'editarPerfil',{'form': form})
 				print('Error en el formulario\n')
 				# cuando falla pasa por aqui, dar mensaje
-
+				
 		#return render(request, 'editarPerfil',{'form': form})
-				return redirect('/menu/perfil')
+		return redirect('/menu/perfil')
 		#return render(request, '/menu/perfil',{'form': form})
- 
 
 
 ''' Lista todos los clientes registrados en el sistema '''
@@ -294,10 +296,12 @@ class IniciarSesion(View):
 				request.session['logged'] = False
 				request.session['pid'] = -1
 				return redirect('/menu/iniciarsesion')
+				
 
 		else:
 			print('Error en formulario\n')
 			return render(request, '/menu/iniciarsesion',{'form': form})
+
 
 
 ''' Realiza operaciones necesarias para el cierre de sesion '''

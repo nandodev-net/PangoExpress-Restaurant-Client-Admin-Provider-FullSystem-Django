@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from .models import *
-############################################3
+from .models import PERFIL, USUARIO, CLIENTE, PROVEEDOR, BILLETERA
+
 #Validadores
 #Validar nombre válido.
 def validate_nombre(valor):
@@ -76,13 +76,15 @@ def validate_rif(rif):
 			params={'rif':rif},
 			)
 	"""
+
+
+
 months={
     1:_('Enero'), 2:_('Febrero'), 3:_('Marzo'), 4:_('Abril'),
     5:_('Mayo'), 6:_('Junio'), 7:_('Julio'), 8:_('Agosto'),
     9:_('Septiembre'), 10:_('Octubre'), 11:_('Noviembre'), 12:_('Diciembre')
 }
 
-##############################################
 
 
 class FormRegistrarUsuario(forms.ModelForm):
@@ -98,7 +100,7 @@ class FormRegistrarUsuario(forms.ModelForm):
 
 class FormRegistrarUsuario2(forms.ModelForm):
 	tipo = forms.ChoiceField(label='Tipo', choices=[(1, 'Cliente'), (2, 'Proveedor')])
-
+	
 	class Meta:
 		model = USUARIO
 		fields = ['contrasenia', 'email']
@@ -109,6 +111,8 @@ class FormRegistrarUsuario2(forms.ModelForm):
 		widgets = {
         	'contrasenia': forms.widgets.PasswordInput,
         }
+
+        
 
 class FormRegistrarCliente(forms.ModelForm):
 	class Meta:
@@ -125,9 +129,11 @@ class FormRegistrarCliente(forms.ModelForm):
         }
 		widgets = {
         	'fechaNacimiento' : forms.widgets.SelectDateWidget(
-        		years=range(1950, 2015), months = months ),
+        		years=range(1890, 2015), months = months ),
 
         }
+
+
 
 class FormRegistrarProveedor(forms.ModelForm):
 	class Meta:
@@ -140,6 +146,7 @@ class FormRegistrarProveedor(forms.ModelForm):
 
 class FormEditarPerfilCliente(forms.ModelForm):
 	pseudonimo = forms.CharField(label='Pseudonimo')
+	
 
 	class Meta:
 		model = CLIENTE
@@ -156,6 +163,10 @@ class FormEditarPerfilCliente(forms.ModelForm):
 			'apellido': _('Apellidos'),
 			'telefono': _('Teléfono'),
         }
+
+        
+
+
 
 class FormEditarPerfilProveedor(forms.ModelForm):
 	pseudonimo = forms.CharField(label='Pseudonimo')
@@ -174,7 +185,7 @@ class FormEditarPerfilProveedor(forms.ModelForm):
 
 class FormIniciarSesion(forms.Form):
 	pseudonimo = forms.CharField(label='Pseudonimo', max_length = 50)
-	passwd = forms.CharField(label='Constraseña', widget=forms.PasswordInput)
+	passwd = forms.CharField(label='Constrasena', widget=forms.PasswordInput)
 	
 class FormCrearBilletera(forms.ModelForm):
     class Meta:
@@ -185,4 +196,4 @@ class FormRecargaBilletera(forms.Form):
     PIN = forms.CharField(max_length=50)
     monto = forms.FloatField(label='Monto')
     
-    
+
