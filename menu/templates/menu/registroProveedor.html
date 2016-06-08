@@ -4,8 +4,14 @@
 {% block main %}
 <form action="" method="post">
     {% csrf_token %}
-    {% bootstrap_form form %}
-    <br/>
++    <p>{% bootstrap_label "Nombre" %}
++		<span style="color:red">*<span>
++		{% bootstrap_field form.nombre  show_label=False %}
++	</p> 
++	<p>{% bootstrap_label "RIF" %}
++		<span style="color:red">*<span>
++		{% bootstrap_field form.rif  show_label=False %}
++	</p>
     <tr><td><input type="submit" value="Agregar"/></td></tr>
 </form>
 {% endblock %}

@@ -1,4 +1,95 @@
 from django.db import models
+from datetime import datetime
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
+#########################3
+
+#Validadores
+#Validar nombre válido.
+def validate_nombre(valor):
+	for x in valor:
+		if not x.isalpha():
+			raise ValidationError(
+            _('%(valor)s No es válido, tiene que ser caracteres'),
+            params={'valor': valor},
+            )
+
+#Validar cédula válida.
+def validate_ci(ci):
+	if len(ci)>8:
+		raise ValidationError(
+            _('%(ci)s No es válido, máximo 8 dígitos'),
+            params={'ci': ci},
+            )
+	try:
+		ci = int(ci)
+		if ci<=0:
+			raise ValidationError(
+            _('%(ci)s No es válido,debe ser mayor a cero (0)'),
+             params={'ci': ci},
+            )
+	except:
+		raise ValidationError(
+			_('%(ci)s No es válido, sólo puede ingresar números'),
+			 params={'ci': ci},
+			)
+
+#Validar teléfono válida.
+def validate_telefono(telf):
+	if not 9<len(telf)<12:
+		raise ValidationError(
+            _('%(telf)s No es válido, la longitud debe ser de 10 o 11'),
+            params={'telf': telf},
+            )
+	try:
+		telf = int(telf)
+		if telf<0:
+			raise ValidationError(
+            _('%(telf)s No es válido,debe ser mayor o igual a cero (0)'),
+            params={'telf': telf},
+            )
+	except:
+		raise ValidationError(
+			_('%(telf)s No es válido, sólo puede ingresar números'),
+			params={'telf': telf},
+			)
+
+#Validar rif válida.
+def validate_rif(rif):
+	#Siguiendo la especificacion, rif debe estar entre 6 a 8 caracteres
+	if not 5<len(rif)<9:
+		raise ValidationError(
+            _('%(rif)s No es válido, la longitud debe ser de 6 a 8'),
+            params={'rif': rif},
+            )
+	"""
+		try:
+		letra=rif[0]
+		if letra.isalpha() is not in ["V","J","E"]:
+			raise ValidationError(
+            _('%(rif)s Debe Empezar con V, J o E)'),
+            params={'rif': rif},
+            )
+		
+		
+	except:
+		raise ValidationError(
+			_('%(rif)s No es válido, sólo puede ingresar números'),
+			params={'rif':rif},
+			)
+
+"""
+####################
+
+
+
+
+
+
+
+
+
+
 
 # Create your models here.
 class PERFIL(models.Model):
@@ -15,7 +106,7 @@ class INTERES_PERFIL(models.Model):
 	interes = models.CharField(max_length=50)
 	
 class USUARIO(models.Model):
-	email = models.CharField(max_length=200, primary_key=True, unique = True)
+	email = models.EmailField(max_length=200, primary_key=True, unique = True)
 	contrasenia = models.CharField(max_length=50)
 	es_cliente = models.BooleanField(default = False)
 	perfil = models.ForeignKey(PERFIL)
@@ -32,10 +123,11 @@ class BILLETERA(models.Model):
 	
 class CLIENTE(models.Model):
 	usuario = models.ForeignKey(USUARIO, primary_key=True)
-	ci = models.CharField(max_length=50, unique=True)
-	nombre = models.CharField(max_length=50)
-	apellido = models.CharField(max_length=50)
-	telefono = models.CharField(max_length=50)
+	ci = models.CharField(max_length=50, unique=True, validators=[validate_ci])
+	nombre = models.CharField(max_length=50, validators=[validate_nombre])
+	apellido = models.CharField(max_length=50, validators=[validate_nombre])
+	telefono = models.CharField(max_length=50, validators=[validate_telefono])
+	fechaNacimiento = models.DateField(null=False)
 	billetera = models.ForeignKey(BILLETERA, null = True)
 
 	def __str__(self):
@@ -43,16 +135,16 @@ class CLIENTE(models.Model):
 
 class PROVEEDOR(models.Model):
 	usuario = models.ForeignKey(USUARIO, primary_key=True)
-	rif = models.CharField(max_length=50, unique=True)
-	nombre = models.CharField(max_length=50)
+	rif = models.CharField(max_length=50, unique=True,validators=[validate_rif])
+	nombre = models.CharField(max_length=50,validators=[validate_nombre])
 
 	def __str__(self):
 		return self.usuario.perfil.pseudonimo
 	
 class RESTAURANT(models.Model):
 	id = models.AutoField(primary_key=True)
-	nombre = models.CharField(max_length=50)
-	RIF = models.CharField(max_length=50,unique=True)
+	nombre = models.CharField(max_length=50,validators=[validate_nombre])
+	RIF = models.CharField(max_length=50,unique=True,validators=[validate_rif])
 	direccion = models.CharField(max_length=50)
 
 	def __str__(self):
@@ -60,8 +152,8 @@ class RESTAURANT(models.Model):
 	
 class TELEFONOS_RESTAURANT(models.Model):
 	establecimiento = models.ForeignKey(RESTAURANT, primary_key=True)
-	telefono = models.CharField(max_length=50, unique=True)
-
+	telefono = models.CharField(max_length=50, unique=True, validators=[validate_telefono])
+ 
 #Problema, clave primaria compuesta, hace falta artilugio. Seguir investigando.	
 class TRANSACCION(models.Model):
 	establecimiento = models.ForeignKey(RESTAURANT)
@@ -81,7 +173,7 @@ class PRODUCTO(models.Model):
 class PLATO(models.Model):
 	id = models.AutoField(primary_key=True)
 	establecimiento = models.ForeignKey(RESTAURANT)
-	nombre = models.CharField(max_length=50)
+	nombre = models.CharField(max_length=50,validators=[validate_nombre])
 	precio = models.FloatField()
 	#path_img = models.FileField(max_length=500, null = True)
 	#  ^-- Esto es raro pal cono
@@ -131,8 +223,8 @@ class Ingredientes(models.Model):
 
 class MENU(models.Model):
 	id = models.AutoField(primary_key = True)
-	nombre = models.CharField(max_length = 100, null = False)
-
+	nombre = models.CharField(max_length = 100, null = False,validators=[validate_nombre])
+ 
 	def __str__(self):
 		return self.nombre
 
