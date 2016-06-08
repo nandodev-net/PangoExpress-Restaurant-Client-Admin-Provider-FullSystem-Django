@@ -26,6 +26,8 @@ class USUARIO(models.Model):
 class BILLETERA(models.Model):
 	id = models.AutoField(primary_key=True)
 	PIN = models.CharField(max_length=50)
+	nombre = models.CharField(max_length=50)
+	apellido = models.CharField(max_length=50)
 	saldo = models.FloatField()
 	
 class CLIENTE(models.Model):

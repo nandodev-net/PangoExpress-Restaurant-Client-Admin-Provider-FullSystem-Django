@@ -1,6 +1,5 @@
 from django import forms
-from .models import PERFIL, USUARIO, CLIENTE, PROVEEDOR
-
+from .models import *
 
 class FormRegistrarUsuario(forms.ModelForm):
 	'''

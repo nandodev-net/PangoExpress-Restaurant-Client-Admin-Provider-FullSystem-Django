@@ -4,7 +4,8 @@ from django.views.generic import View
 from django.db import IntegrityError
 
 from .forms import *
-from .models import PERFIL, USUARIO, CLIENTE, PROVEEDOR, PLATO
+from .models import *
+from .BilleteraElectronica import *
 
 
 def index(request):
