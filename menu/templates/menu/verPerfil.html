@@ -19,7 +19,6 @@
         <p> Apellido: {{ apellido }}</p>
         <p> CI: {{ ci }}</p>
         <p> Telefono: {{ telefono }}</p>
-        <p> Fecha de Nacimiento: {{fechaNacimiento}}</p>
 
     {% else %}
         <p> RIF: {{ rif }}</p>
@@ -31,6 +30,8 @@
     {# Boton de afiliar billetera #}
     {% if es_cliente %}
         {% bootstrap_button "Billetera" button_class="btn btn-default" href='/menu/perfil/billetera' %}
+    {% else %}
+        {% bootstrap_button "Inventario" button_class="btn btn-default" href='/menu/perfil/inventario' %}
     {% endif %}
 
 {% else %}

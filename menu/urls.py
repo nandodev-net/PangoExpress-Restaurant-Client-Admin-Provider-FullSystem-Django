@@ -3,13 +3,17 @@ from . import views
 
 app_name = "menu"
 urlpatterns = [
-	#/menu/
+	#/
 	url(r'^$', views.index, name='index'),
-
+	
+	#/menu/
 	url(r'^menu/$', views.menu, name='menu'),
 
 	#/menu/720/
 	url(r'^(?P<id_plato>[0-9]+)/$', views.detail, name='detail'),
+	
+	#/menu/ordenar/120
+    url(r'^ordenar/(?P<id_plato>[0-9]+)/$', views.hacer_pedido, name='pedido'),
 
 	#/menu/registro/
 	url(r'^registro/$', views.FormularioRegistro.as_view(), name='registro'),
@@ -34,6 +38,18 @@ urlpatterns = [
 
     #/menu/perfil/billetera/recargar
     url(r'^perfil/billetera/recargar/$', views.RecargarBilletera.as_view(), name = 'crear_billetera'),
+    
+    #/menu/perfil/inventario
+    url(r'^perfil/inventario/$', views.VerInventario.as_view(), name="ver_inventario"),
+
+    #/menu/perfil/inventario/eliminar/23
+    url(r'^perfil/inventario/eliminar/(?P<id_ofrece>[0-9]+)/$', views.eliminar_producto_inventario, name="eliminar_producto_inventario"),
+    
+    #/menu/verpedido
+    url(r'^verpedido/$', views.ver_pedido, name = 'ver_pedido'),
+
+    #/menu/verpedido/pagar
+    url(r'^verpedido/pagar/(?P<cuenta_id>[0-9]+)$', views.pagar_cuenta, name = 'pagar_pedido'),
 
 	#/menu/verclientes/
 	url(r'^verclientes/$', views.ver_clientes, name = 'ver_clientes'),

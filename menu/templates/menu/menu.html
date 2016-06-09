@@ -1,0 +1,34 @@
+{% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
+
+{% block main %}
+    <h1>MENU</h1>
+    {% if all_platos %}
+    {# Muestro platos como una lista de bootstrap #}
+        <ul class="list-group">
+        {% for plato in all_platos %}
+            <li class="list-group-item">
+                <a class="" href="{% url 'menu:detail' plato.id %}">{{ plato.nombre }}</a>
+                {% if usuario and usuario.es_cliente %}
+                    <a class="btn btn-default" href="ordenar/{{ plato.id }}">Ordenar</a>
+                {% endif %}
+                <span class="badge">Bs.{{plato.precio}}</span> </a>
+            </li>
+        {% endfor %}
+        </ul>
+
+    {% else %}
+        <h3>Sin disponibilidad de menu</h3>
+    {% endif %}
+
+    <!--
+    {% if menus %}
+        {% for menu in menus %}
+            <h1>{{ menu.nombre }}:</h1>
+        {% endfor %}
+    {% else %}
+        <h3>Sin disponibilidad de menu</h3>
+
+    {% endif %}
+    -->
+{% endblock %}

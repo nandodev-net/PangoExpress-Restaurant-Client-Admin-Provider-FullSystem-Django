@@ -1,0 +1,20 @@
+{% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
+
+{% block main %}
+    {% if message %}
+        <script> alert('{{ message }}')</script>
+    {% endif %}
+
+    {% if billetera %}
+        <h3>Confirme el PIN de su billetera</h3>
+        <form action = "" method = "post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type = "submit" value = "Confirmar"/>
+        </form>
+    {% else %}
+        <h3> Usted no ha creado una billetera</h3>
+        <a class="btn btn-default" href="/menu/perfil/billetera/crear/">Crear Billetera</a>
+    {% endif %}
+{% endblock %}

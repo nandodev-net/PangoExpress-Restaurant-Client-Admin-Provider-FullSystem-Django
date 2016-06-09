@@ -1,0 +1,17 @@
+{% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
+
+{% block main %}
+    {% if pedidos %}
+        {% for pedido in pedidos %}
+            <h4>{{ pedido.plato.nombre }}: {{ pedido.plato.precio }} x {{ pedido.cantidad }}</h4>
+            <br/>
+        {% endfor %}
+
+        <h2>Total: {{ cuenta.total }} </h2>
+
+        <a class="btn btn-default" href="/menu/verpedido/pagar/{{ cuenta.id }}">Pagar</a>
+    {% else %}
+        <h3> Usted no ha realizado ningun pedido </h3>
+    {% endif %}
+{% endblock %}

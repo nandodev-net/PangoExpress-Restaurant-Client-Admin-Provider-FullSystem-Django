@@ -90,7 +90,10 @@ class BilleteraElectronica(object):
             else:
                 print("Fecha invalida.")
                 return 1;
-            
+
+        elif(self.pin != pin):
+            return 4;
+
         elif(self.balance < monto):
             
             print("Saldo insuficiente.");
@@ -101,7 +104,6 @@ class BilleteraElectronica(object):
             print("Monto invalido.");
             return 3;
         else:
-            
             print("Pin incorrecto.");
             return 4;
             

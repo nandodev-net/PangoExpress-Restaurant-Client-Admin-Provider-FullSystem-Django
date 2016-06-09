@@ -17,6 +17,10 @@
         {% load staticfiles %}
         <link rel = "stylesheet" type ="text/css" href="{% static 'menu/layout.css' %}" />
     {% endblock %}
+
+    {% block title %}
+        <title> PangoExpress </title>
+    {% endblock %}
 </head>
 {%block body-tag%}
 
@@ -39,7 +43,7 @@
                 {# Usuarios logeados #}
                 {% if request.session.logged %}
                     {# Ver Pedido #}
-                    <li> <a href = "#"> Pedido </a></li>
+                    <li> <a href = "{% url 'menu:ver_pedido' %}"> Pedido </a></li>
                     {# Ver Perfil #}
                     <li> <a href = "{% url 'menu:perfil' %}"> Perfil </a></li>
                 {% endif %}
