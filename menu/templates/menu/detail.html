@@ -1,4 +1,5 @@
 {% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
 
 
 {% block main %}
@@ -7,4 +8,9 @@
     <h4>{{plato.precio}} BsF.</h4>
     <h3> Descripcion: </h3>
     <h4>{{ plato.descripcion }}</h4>
+
+    {% if usuario and usuario.es_cliente %}
+        <a class="btn btn-default" href="/menu/ordenar/{{ plato.id }}">Ordenar</a>
+    {% endif %}
+    <a class="btn btn-default" href="/menu/">Volver</a>
 {% endblock %}
