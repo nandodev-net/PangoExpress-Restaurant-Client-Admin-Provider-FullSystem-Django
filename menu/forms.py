@@ -182,13 +182,12 @@ class FormEditarPerfil(forms.ModelForm):
 
 
 class FormEditarPerfilProveedor(forms.ModelForm):
-	pseudonimo = forms.CharField(label='Pseudonimo')
 
 	class Meta:
 		model = PROVEEDOR
 		fields = ['nombre', 'rif']
 		widgets = {
-        	'nombre' : forms.widgets.TextInput(attrs={'disabled': 'disabled'}),
+        	'nombre' : forms.widgets.TextInput(attrs={'readonly': 'readonly'}),
         }
 		labels = {
             'nombre': _('Nombre'),

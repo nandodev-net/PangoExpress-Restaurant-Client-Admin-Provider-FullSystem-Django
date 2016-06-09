@@ -225,7 +225,7 @@ class EditarPerfil(View):
             data['rif'] = proveedor.rif
 
             form = FormEditarPerfilProveedor(data, instance = proveedor)
-            form2 = FormEditarPerfil(instance = Perfil)
+            form2 = FormEditarPerfil(instance = perfil)
 
         context = {'form' : form, 'form2':form2 }
 
@@ -291,7 +291,8 @@ class EditarPerfil(View):
                 except IntegrityError:
                     print('Integrity Error\n')
             else:
-                form = FormEditarPerfilProveedor(data, request.POST, instance = proveedor)
+                print(form.errors, form2.errors)
+                form = FormEditarPerfilProveedor(request.POST, instance = proveedor)
                 form2 = FormEditarPerfil(request.POST, instance = perfil)
                 return render(request, 'menu/editarPerfil.html',{'form': form, 'form2':form2})
                 print('Error en el formulario\n')
