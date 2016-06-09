@@ -153,18 +153,18 @@ class FormRegistrarProveedor(forms.ModelForm):
         }
 
 class FormEditarPerfilCliente(forms.ModelForm):
-	pseudonimo = forms.CharField(label='Pseudonimo')
+	#pseudonimo = forms.CharField(label='Pseudonimo')
 	
 
 	class Meta:
 		model = CLIENTE
 		fields = ['nombre', 'apellido', 'telefono']
 		widgets = {
-        	'nombre' : forms.widgets.TextInput(attrs={'disabled': 'disabled'}),
-        	'apellido' : forms.widgets.TextInput(attrs={'disabled': 'disabled'}),
+        	'nombre' : forms.widgets.TextInput(attrs={'readonly': 'readonly'}),
+        	'apellido' : forms.widgets.TextInput(attrs={'readonly': 'readonly'}),
       
         }
-
+        
         
 		labels = {
 			'nombre': _('Nombres'),
@@ -173,7 +173,12 @@ class FormEditarPerfilCliente(forms.ModelForm):
         }
 
         
-
+class FormEditarPerfil(forms.ModelForm):
+	class Meta:
+		model = PERFIL
+		fields = ['pseudonimo']
+			
+	
 
 
 class FormEditarPerfilProveedor(forms.ModelForm):
