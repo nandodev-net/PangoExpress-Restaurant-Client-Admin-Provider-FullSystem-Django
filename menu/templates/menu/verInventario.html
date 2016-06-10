@@ -3,7 +3,7 @@
 
 {% block main %}
     {% for ofrece in inventario %}
-        <h3>{{ ofrece.producto.nombre }}: {{ ofrece.precio }}
+        <h3>{{ ofrece.producto.nombre }}: BsF.{{ ofrece.precio }}
         <a class="btn btn-default" href="eliminar/{{ ofrece.id }}">Eliminar</a></h3>
     {% endfor %}
     <br/>

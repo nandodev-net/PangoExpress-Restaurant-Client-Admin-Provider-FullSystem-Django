@@ -208,24 +208,36 @@ class EditarPerfil(View):
 
         perfil = PERFIL.objects.get(id=request.session['pid'])
         usuario = USUARIO.objects.get(perfil=perfil)
-        data = { 'pseudonimo' : perfil.pseudonimo}
 
         if(usuario.es_cliente):
             cliente = CLIENTE.objects.get(usuario = usuario)
-            data['nombre'] = cliente.nombre
-            data['apellido'] = cliente.apellido
-            data['telefono'] = cliente.telefono
-            data['fechaNacimiento'] = cliente.fechaNacimiento
+            data = {'pseudonimo' : perfil.pseudonimo,
+                    'nombre' : cliente.nombre,
+                    'apellido': cliente.apellido,
+                    'telefono': cliente.telefono
+                    }
 
-            form = FormEditarPerfilCliente(data, instance = cliente)
+<<<<<<< HEAD
+            form = FormEditarPerfilCliente(data)
+=======
+            form = FormEditarPerfilCliente( instance = cliente)
+            form2 = FormEditarPerfil(instance = perfil)
+>>>>>>> bbf9e128cab91b6c11a02cd43bf64cd29df273e8
         else:
             proveedor = PROVEEDOR.objects.get(usuario = usuario)
-            data['nombre'] = proveedor.nombre
-            data['rif'] = proveedor.rif
+            data = {'pseudonimo' : perfil.pseudonimo,
+                    'nombre' : proveedor.nombre,
+                    'rif' : proveedor.rif
+                    }
 
+<<<<<<< HEAD
+            form = FormEditarPerfilProveedor(data)
+=======
             form = FormEditarPerfilProveedor(data, instance = proveedor)
+            form2 = FormEditarPerfil(instance = perfil)
+>>>>>>> bbf9e128cab91b6c11a02cd43bf64cd29df273e8
 
-        context = {'form' : form }
+        context = {'form' : form, 'form2':form2 }
 
         return render(request, 'menu/editarPerfil.html', context)
 
@@ -235,36 +247,93 @@ class EditarPerfil(View):
 
         if(usuario.es_cliente):
             cliente = CLIENTE.objects.get(usuario = usuario)
-            form = FormEditarPerfilCliente(request.POST, instance = cliente)
+<<<<<<< HEAD
+            form = FormEditarPerfilCliente(request.POST)
 
             if form.is_valid():
                 try:
-                    cliente = form.save()
                     perfil.pseudonimo = form.cleaned_data['pseudonimo']
                     perfil.save()
+                    cliente.telefono = form.cleaned_data['telefono']
+                    cliente.save()
                 except IntegrityError:
                     print('Integriry Error\n')
             else:
-                return render(request, 'editarPerfil',{'form': form})
                 print('Error en formulario weon\n')
+                return render(request, 'menu/editarPerfil.html',{'form': form})
+=======
+            data = {'pseudonimo':perfil.pseudonimo,
+                    'nombre' : cliente.nombre,
+                    'apellido' : cliente.apellido,
+                    'telefono' : cliente.telefono}
+            form = FormEditarPerfilCliente(request.POST)
+            form2 = FormEditarPerfil(request.POST)
+            
 
+            if form.is_valid() and form2.is_valid():
+                try:
+                    print(form.cleaned_data)
+                    newcliente = form.save(commit=False)
+                    newcliente.ci = cliente.ci
+                    newcliente.fechaNacimiento = cliente.fechaNacimiento
+                    newcliente.billetera = cliente.billetera
+                    newcliente.usuario = usuario
+                    #newcliente.id = cliente.id
+                    newcliente.nombre = cliente.nombre
+                    newcliente.apellido = cliente.apellido
+                    newcliente.save()
+                    print('salve form')
+                    newperfil = form2.save(commit=False)
+                    newperfil.id = perfil.id
+                    newperfil.save()
+                    print('form2')
+                except IntegrityError:
+                    print('Integriry Error\n')
+            else:
+                print(form.errors)
+                form = FormEditarPerfilCliente(data, request.POST, instance = cliente)
+                form2 = FormEditarPerfil(request.POST, instance = perfil)
+                print('Error en formulario weon\n')
+                return render(request, 'menu/editarPerfil.html',{'form': form, 'form2':form2})
+                
+>>>>>>> bbf9e128cab91b6c11a02cd43bf64cd29df273e8
 
-                # cuando encuentra error pasa por aqui, enviar un mensaje
         else:
             proveedor = PROVEEDOR.objects.get(usuario = usuario)
-            form = FormEditarPerfilProveedor(request.POST, instance = proveedor)
+            form = FormEditarPerfilProveedor(request.POST)
+<<<<<<< HEAD
+=======
+            form2 = FormEditarPerfil(request.POST)
+>>>>>>> bbf9e128cab91b6c11a02cd43bf64cd29df273e8
 
-            if form.is_valid():
+            if form.is_valid() and form2.is_valid():
                 try:
-                    proveedor = form.save()
+<<<<<<< HEAD
                     perfil.pseudonimo = form.cleaned_data['pseudonimo']
                     perfil.save()
+                    proveedor.rif = form.cleaned_data['rif']
+                    proveedor.save()
                 except IntegrityError:
                     print('Integrity Error\n')
             else:
-                return render(request, 'editarPerfil',{'form': form})
+=======
+                    newproveedor = form.save(commit=False)
+                    newproveedor.direccion = proveedor.direccion
+                    newproveedor.id = proveedor.id
+                    nreproveedor.save()
+                    newperfil = form2.save(commit=False)
+                    newperfil.id = perfil.id
+                    newperfil.save()
+                except IntegrityError:
+                    print('Integrity Error\n')
+            else:
+                print(form.errors, form2.errors)
+                form = FormEditarPerfilProveedor(request.POST, instance = proveedor)
+                form2 = FormEditarPerfil(request.POST, instance = perfil)
+                return render(request, 'menu/editarPerfil.html',{'form': form, 'form2':form2})
+>>>>>>> bbf9e128cab91b6c11a02cd43bf64cd29df273e8
                 print('Error en el formulario\n')
-                # cuando falla pasa por aqui, dar mensaje
+                return render(request, 'menu/editarPerfil.html',{'form': form})
 
         #return render(request, 'editarPerfil',{'form': form})
         return redirect('/menu/perfil')

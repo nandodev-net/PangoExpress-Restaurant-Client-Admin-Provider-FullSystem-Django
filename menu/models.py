@@ -245,14 +245,15 @@ class PRODUCTO(models.Model):
     nombre = models.CharField(max_length=50)
     fecha_vencimiento = models.DateField()
 
+    def __str__(self):
+        return self.nombre
+
 #Problema, clave primaria compuesta, hace falta artilugio. Seguir investigando.	
 class PLATO(models.Model):
     id = models.AutoField(primary_key=True)
     establecimiento = models.ForeignKey(RESTAURANT, null = True)
-    nombre = models.CharField(max_length=50,validators=[validate_nombre])
+    nombre = models.CharField(max_length=50)
     precio = models.FloatField()
-    #path_img = models.FileField(max_length=500, null = True)
-    #  ^-- Esto es raro pal cono
     path_img = models.FileField()
     descripcion = models.CharField(max_length = 500)
 
@@ -282,11 +283,11 @@ class Pedido(models.Model):
 
 #Problema, clave primaria compuesta, hace falta artilugio. Seguir investigando.
 class Ofrece(models.Model):
-    email = models.ForeignKey(PROVEEDOR)
+    proveedor = models.ForeignKey(PROVEEDOR)
     producto = models.ForeignKey(PRODUCTO)
     precio = models.FloatField()
     class Meta:
-        unique_together = ('email', 'producto')
+        unique_together = ('proveedor', 'producto')
 
 #Gran problema. DJANGO no soporta claves foraneas compuestas. Por lo que he leido no hay artilugio que lo resuelva.
 class Ingredientes(models.Model):

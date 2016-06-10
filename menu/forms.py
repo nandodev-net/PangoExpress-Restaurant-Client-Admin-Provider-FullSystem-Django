@@ -6,85 +6,92 @@ from .models import PERFIL, USUARIO, CLIENTE, PROVEEDOR, BILLETERA, PRODUCTO, Of
 #Validadores
 #Validar nombre válido.
 def validate_nombre(valor):
-	for x in valor:
-		if not x.isalpha():
-			raise ValidationError(
+    for x in valor:
+        if not x.isalpha():
+            raise ValidationError(
             _('%(valor)s No es válido, tiene que ser caracteres'),
             params={'valor': valor},
             )
 
 #Validar cédula válida.
 def validate_ci(ci):
-	if len(ci)>8:
-		raise ValidationError(
+    if len(ci)>8:
+        raise ValidationError(
             _('%(ci)s No es válido, máximo 8 dígitos'),
             params={'ci': ci},
             )
-	try:
-		ci = int(ci)
-		if ci<=0:
-			raise ValidationError(
+    try:
+        ci = int(ci)
+        if ci<=0:
+            raise ValidationError(
             _('%(ci)s No es válido,debe ser mayor a cero (0)'),
             params={'ci': ci},
             )
-	except:
-		raise ValidationError(
-			_('%(ci)s No es válido, sólo puede ingresar números'),
-			params={'ci': ci},
-			)
+    except:
+        raise ValidationError(
+            _('%(ci)s No es válido, sólo puede ingresar números'),
+            params={'ci': ci},
+            )
 
 #Validar teléfono válida.
 def validate_telefono(telf):
-	if not 9<len(telf)<12:
-		raise ValidationError(
+    if not 9<len(telf)<12:
+        raise ValidationError(
             _('%(telf)s No es válido, la longitud debe ser de 10 o 11'),
             params={'telf': telf},
             )
-	try:
-		telf = int(telf)
-		if telf<0:
-			raise ValidationError(
+    try:
+        telf = int(telf)
+        if telf<0:
+            raise ValidationError(
             _('%(telf)s No es válido,debe ser mayor o igual a cero (0)'),
             params={'telf': telf},
             )
-	except:
-		raise ValidationError(
-			_('%(telf)s No es válido, sólo puede ingresar números'),
-			params={'telf': telf},
-			)
+    except:
+        raise ValidationError(
+            _('%(telf)s No es válido, sólo puede ingresar números'),
+            params={'telf': telf},
+            )
 
 #Validar rif válida.
 def validate_rif(rif):
-	#Siguiendo la especificacion, rif debe estar entre 6 a 8 caracteres
-	if 5<len(rif)<9:
-		raise ValidationError(
+    #Siguiendo la especificacion, rif debe estar entre 6 a 8 caracteres
+    if len(rif)<6 or len(rif)>8:
+        raise ValidationError(
             _('%(rif)s No es válido, la longitud debe ser de 6 a 8'),
             params={'rif': rif},
             )
-	"""
-		try:
-		letra=rif[0]
-		if letra.isalpha() is not in ["V","J","E"]:
-			raise ValidationError(
+    """
+        try:
+        letra=rif[0]
+        if letra.isalpha() is not in ["V","J","E"]:
+            raise ValidationError(
             _('%(rif)s Debe Empezar con V, J o E)'),
             params={'rif': rif},
             )
-		
-		
-	except:
-		raise ValidationError(
-			_('%(rif)s No es válido, sólo puede ingresar números'),
-			params={'rif':rif},
-			)
-	"""
-	
+
+
+    except:
+        raise ValidationError(
+            _('%(rif)s No es válido, sólo puede ingresar números'),
+            params={'rif':rif},
+            )
+    """
+
 def validate_monto(monto):
-	if monto<=0:
-		raise ValidationError(
+    if monto<=0:
+        raise ValidationError(
             _('%(monto)s Monto inválido, debe ser un monto positivo.'),
             params={'monto': monto},
             )
 
+def validate_pseudonimo(pseudonimo):
+    for x in pseudonimo:
+        if x== ' ':
+            raise ValidationError(
+            _('%(pseudonimo)s No es válido, no debe tener espacios.'),
+            params={'pseudonimo': pseudonimo},
+            )
 
 
 months={
@@ -96,75 +103,93 @@ months={
 
 
 class FormRegistrarUsuario(forms.ModelForm):
-	'''
-	email = forms.CharField(label='e-mail', max_length=100)
-	passwd = forms.CharField(label='Constrasena', widget=forms.PasswordInput)
-	'''
-	#tipo = forms.ChoiceField(label= 'Tipo', choices = [(1, 'cliente'), (2, 'proveedor')])
+    '''
+    email = forms.CharField(label='e-mail', max_length=100)
+    passwd = forms.CharField(label='Constrasena', widget=forms.PasswordInput)
+    '''
+    #tipo = forms.ChoiceField(label= 'Tipo', choices = [(1, 'cliente'), (2, 'proveedor')])
 
-	class Meta:
-		model = PERFIL
-		fields = ['pseudonimo']
+    class Meta:
+        model = PERFIL
+        fields = ['pseudonimo']
 
 class FormRegistrarUsuario2(forms.ModelForm):
-	tipo = forms.ChoiceField(label='Tipo', choices=[(1, 'Cliente'), (2, 'Proveedor')])
-	
-	class Meta:
-		model = USUARIO
-		fields = ['contrasenia', 'email']
-		labels = {
+    tipo = forms.ChoiceField(label='Tipo', choices=[(1, 'Cliente'), (2, 'Proveedor')])
+
+    class Meta:
+        model = USUARIO
+        fields = ['contrasenia', 'email']
+        labels = {
             'contrasenia': _('Contraseña'),
             'email': _('Email'),
         }
-		widgets = {
-        	'contrasenia': forms.widgets.PasswordInput,
+        widgets = {
+            'contrasenia': forms.widgets.PasswordInput,
         }
 
         
 
 class FormRegistrarCliente(forms.ModelForm):
-	class Meta:
-		model = CLIENTE
-		nombre = forms.CharField(validators=[validate_nombre])
-		apellido = forms.CharField(validators=[validate_nombre])
-		telefono = forms.CharField(validators=[validate_telefono])
-		fields = ['nombre', 'apellido', 'telefono', 'ci','fechaNacimiento']
-		labels = {
+    class Meta:
+        model = CLIENTE
+        nombre = forms.CharField(validators=[validate_nombre])
+        apellido = forms.CharField(validators=[validate_nombre])
+        telefono = forms.CharField(validators=[validate_telefono])
+        fields = ['nombre', 'apellido', 'telefono', 'ci','fechaNacimiento']
+        labels = {
             'nombre': _('Nombres'),
             'apellido': _('Apellidos'),
             'telefono': _('Teléfono'),
             'fechaNacimiento': _('Fecha de Nacimiento'),
         }
-		widgets = {
-        	'fechaNacimiento' : forms.widgets.SelectDateWidget(
-        		years=range(1890, 2015), months = months ),
+        widgets = {
+            'fechaNacimiento' : forms.widgets.SelectDateWidget(
+                years=range(1890, 2015), months = months ),
 
         }
 
 
 
 class FormRegistrarProveedor(forms.ModelForm):
-	class Meta:
-		model = PROVEEDOR
-		fields = ['nombre', 'rif']
-		labels = {
+    class Meta:
+        model = PROVEEDOR
+        fields = ['nombre', 'rif']
+        labels = {
             'nombre': _('Nombre'),
             'rif': _('RIF')
         }
 
+<<<<<<< HEAD
+class FormEditarPerfilCliente(forms.Form):
+    pseudonimo = forms.CharField(label='Pseudonimo', validators =[validate_pseudonimo])
+    nombre = forms.CharField(label='Nombre')
+    apellido = forms.CharField(label='Apellido')
+    telefono = forms.CharField(label='Telefono', validators = [validate_telefono])
+
+    nombre.widget = forms.widgets.TextInput(attrs={'readonly': 'readonly'})
+    apellido.widget = forms.widgets.TextInput(attrs={'readonly': 'readonly'})
+
+
+class FormEditarPerfilProveedor(forms.Form):
+    pseudonimo = forms.CharField(label='Pseudonimo', validators = [validate_pseudonimo])
+    rif = forms.CharField(label='RIF', validators = [validate_rif])
+    nombre = forms.CharField(label='Nombre')
+
+    nombre.widget = forms.widgets.TextInput(attrs={'readonly': 'readonly'})
+=======
 class FormEditarPerfilCliente(forms.ModelForm):
-	pseudonimo = forms.CharField(label='Pseudonimo')
+	#pseudonimo = forms.CharField(label='Pseudonimo')
 	
 
 	class Meta:
 		model = CLIENTE
 		fields = ['nombre', 'apellido', 'telefono']
 		widgets = {
-        	'nombre' : forms.widgets.TextInput(attrs={'disabled': 'disabled'}),
-        	'apellido' : forms.widgets.TextInput(attrs={'disabled': 'disabled'}),
+        	'nombre' : forms.widgets.TextInput(attrs={'readonly': 'readonly'}),
+        	'apellido' : forms.widgets.TextInput(attrs={'readonly': 'readonly'}),
       
         }
-
+        
         
 		labels = {
 			'nombre': _('Nombres'),
@@ -173,28 +198,33 @@ class FormEditarPerfilCliente(forms.ModelForm):
         }
 
         
-
+class FormEditarPerfil(forms.ModelForm):
+	class Meta:
+		model = PERFIL
+		fields = ['pseudonimo']
+			
+	
 
 
 class FormEditarPerfilProveedor(forms.ModelForm):
-	pseudonimo = forms.CharField(label='Pseudonimo')
 
 	class Meta:
 		model = PROVEEDOR
 		fields = ['nombre', 'rif']
 		widgets = {
-        	'nombre' : forms.widgets.TextInput(attrs={'disabled': 'disabled'}),
+        	'nombre' : forms.widgets.TextInput(attrs={'readonly': 'readonly'}),
         }
 		labels = {
             'nombre': _('Nombre'),
             'rif': _('RIF')
         }
+>>>>>>> bbf9e128cab91b6c11a02cd43bf64cd29df273e8
 
 
 class FormIniciarSesion(forms.Form):
-	pseudonimo = forms.CharField(label='Pseudonimo', max_length = 50)
-	passwd = forms.CharField(label='Constrasena', widget=forms.PasswordInput)
-	
+    pseudonimo = forms.CharField(label='Pseudonimo', max_length = 50)
+    passwd = forms.CharField(label='Constrasena', widget=forms.PasswordInput)
+
 class FormCrearBilletera(forms.ModelForm):
     class Meta:
         model = BILLETERA
