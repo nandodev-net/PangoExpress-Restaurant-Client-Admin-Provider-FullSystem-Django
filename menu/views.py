@@ -217,12 +217,7 @@ class EditarPerfil(View):
                     'telefono': cliente.telefono
                     }
 
-<<<<<<< HEAD
             form = FormEditarPerfilCliente(data)
-=======
-            form = FormEditarPerfilCliente( instance = cliente)
-            form2 = FormEditarPerfil(instance = perfil)
->>>>>>> bbf9e128cab91b6c11a02cd43bf64cd29df273e8
         else:
             proveedor = PROVEEDOR.objects.get(usuario = usuario)
             data = {'pseudonimo' : perfil.pseudonimo,
@@ -230,14 +225,9 @@ class EditarPerfil(View):
                     'rif' : proveedor.rif
                     }
 
-<<<<<<< HEAD
             form = FormEditarPerfilProveedor(data)
-=======
-            form = FormEditarPerfilProveedor(data, instance = proveedor)
-            form2 = FormEditarPerfil(instance = perfil)
->>>>>>> bbf9e128cab91b6c11a02cd43bf64cd29df273e8
 
-        context = {'form' : form, 'form2':form2 }
+        context = {'form' : form}
 
         return render(request, 'menu/editarPerfil.html', context)
 
@@ -247,7 +237,6 @@ class EditarPerfil(View):
 
         if(usuario.es_cliente):
             cliente = CLIENTE.objects.get(usuario = usuario)
-<<<<<<< HEAD
             form = FormEditarPerfilCliente(request.POST)
 
             if form.is_valid():
@@ -261,54 +250,13 @@ class EditarPerfil(View):
             else:
                 print('Error en formulario weon\n')
                 return render(request, 'menu/editarPerfil.html',{'form': form})
-=======
-            data = {'pseudonimo':perfil.pseudonimo,
-                    'nombre' : cliente.nombre,
-                    'apellido' : cliente.apellido,
-                    'telefono' : cliente.telefono}
-            form = FormEditarPerfilCliente(request.POST)
-            form2 = FormEditarPerfil(request.POST)
-            
-
-            if form.is_valid() and form2.is_valid():
-                try:
-                    print(form.cleaned_data)
-                    newcliente = form.save(commit=False)
-                    newcliente.ci = cliente.ci
-                    newcliente.fechaNacimiento = cliente.fechaNacimiento
-                    newcliente.billetera = cliente.billetera
-                    newcliente.usuario = usuario
-                    #newcliente.id = cliente.id
-                    newcliente.nombre = cliente.nombre
-                    newcliente.apellido = cliente.apellido
-                    newcliente.save()
-                    print('salve form')
-                    newperfil = form2.save(commit=False)
-                    newperfil.id = perfil.id
-                    newperfil.save()
-                    print('form2')
-                except IntegrityError:
-                    print('Integriry Error\n')
-            else:
-                print(form.errors)
-                form = FormEditarPerfilCliente(data, request.POST, instance = cliente)
-                form2 = FormEditarPerfil(request.POST, instance = perfil)
-                print('Error en formulario weon\n')
-                return render(request, 'menu/editarPerfil.html',{'form': form, 'form2':form2})
-                
->>>>>>> bbf9e128cab91b6c11a02cd43bf64cd29df273e8
 
         else:
             proveedor = PROVEEDOR.objects.get(usuario = usuario)
             form = FormEditarPerfilProveedor(request.POST)
-<<<<<<< HEAD
-=======
-            form2 = FormEditarPerfil(request.POST)
->>>>>>> bbf9e128cab91b6c11a02cd43bf64cd29df273e8
 
-            if form.is_valid() and form2.is_valid():
+            if form.is_valid():
                 try:
-<<<<<<< HEAD
                     perfil.pseudonimo = form.cleaned_data['pseudonimo']
                     perfil.save()
                     proveedor.rif = form.cleaned_data['rif']
@@ -316,22 +264,6 @@ class EditarPerfil(View):
                 except IntegrityError:
                     print('Integrity Error\n')
             else:
-=======
-                    newproveedor = form.save(commit=False)
-                    newproveedor.direccion = proveedor.direccion
-                    newproveedor.id = proveedor.id
-                    nreproveedor.save()
-                    newperfil = form2.save(commit=False)
-                    newperfil.id = perfil.id
-                    newperfil.save()
-                except IntegrityError:
-                    print('Integrity Error\n')
-            else:
-                print(form.errors, form2.errors)
-                form = FormEditarPerfilProveedor(request.POST, instance = proveedor)
-                form2 = FormEditarPerfil(request.POST, instance = perfil)
-                return render(request, 'menu/editarPerfil.html',{'form': form, 'form2':form2})
->>>>>>> bbf9e128cab91b6c11a02cd43bf64cd29df273e8
                 print('Error en el formulario\n')
                 return render(request, 'menu/editarPerfil.html',{'form': form})
 
@@ -547,6 +479,7 @@ def hacer_pedido(request, id_plato):
         if(not PedidoEnCuenta.objects.filter(plato = pedido.plato, cuenta=cuenta).exists()):
             cuenta.total += pedido.plato.precio
             cuenta.save()
+            pedido.cantidad = 1
             pedido.save()
         else:
             pedido = PedidoEnCuenta.objects.get(plato = pedido.plato,
