@@ -159,6 +159,7 @@ class FormRegistrarProveedor(forms.ModelForm):
             'rif': _('RIF')
         }
 
+<<<<<<< HEAD
 class FormEditarPerfilCliente(forms.Form):
     pseudonimo = forms.CharField(label='Pseudonimo', validators =[validate_pseudonimo])
     nombre = forms.CharField(label='Nombre')
@@ -175,6 +176,49 @@ class FormEditarPerfilProveedor(forms.Form):
     nombre = forms.CharField(label='Nombre')
 
     nombre.widget = forms.widgets.TextInput(attrs={'readonly': 'readonly'})
+=======
+class FormEditarPerfilCliente(forms.ModelForm):
+	#pseudonimo = forms.CharField(label='Pseudonimo')
+	
+
+	class Meta:
+		model = CLIENTE
+		fields = ['nombre', 'apellido', 'telefono']
+		widgets = {
+        	'nombre' : forms.widgets.TextInput(attrs={'readonly': 'readonly'}),
+        	'apellido' : forms.widgets.TextInput(attrs={'readonly': 'readonly'}),
+      
+        }
+        
+        
+		labels = {
+			'nombre': _('Nombres'),
+			'apellido': _('Apellidos'),
+			'telefono': _('Teléfono'),
+        }
+
+        
+class FormEditarPerfil(forms.ModelForm):
+	class Meta:
+		model = PERFIL
+		fields = ['pseudonimo']
+			
+	
+
+
+class FormEditarPerfilProveedor(forms.ModelForm):
+
+	class Meta:
+		model = PROVEEDOR
+		fields = ['nombre', 'rif']
+		widgets = {
+        	'nombre' : forms.widgets.TextInput(attrs={'readonly': 'readonly'}),
+        }
+		labels = {
+            'nombre': _('Nombre'),
+            'rif': _('RIF')
+        }
+>>>>>>> bbf9e128cab91b6c11a02cd43bf64cd29df273e8
 
 
 class FormIniciarSesion(forms.Form):
