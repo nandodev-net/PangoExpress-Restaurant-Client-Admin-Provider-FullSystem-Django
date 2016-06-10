@@ -208,22 +208,24 @@ class EditarPerfil(View):
 
         perfil = PERFIL.objects.get(id=request.session['pid'])
         usuario = USUARIO.objects.get(perfil=perfil)
-        data = { 'pseudonimo' : perfil.pseudonimo}
 
         if(usuario.es_cliente):
             cliente = CLIENTE.objects.get(usuario = usuario)
-            data['nombre'] = cliente.nombre
-            data['apellido'] = cliente.apellido
-            data['telefono'] = cliente.telefono
-            data['fechaNacimiento'] = cliente.fechaNacimiento
+            data = {'pseudonimo' : perfil.pseudonimo,
+                    'nombre' : cliente.nombre,
+                    'apellido': cliente.apellido,
+                    'telefono': cliente.telefono
+                    }
 
-            form = FormEditarPerfilCliente(data, instance = cliente)
+            form = FormEditarPerfilCliente(data)
         else:
             proveedor = PROVEEDOR.objects.get(usuario = usuario)
-            data['nombre'] = proveedor.nombre
-            data['rif'] = proveedor.rif
+            data = {'pseudonimo' : perfil.pseudonimo,
+                    'nombre' : proveedor.nombre,
+                    'rif' : proveedor.rif
+                    }
 
-            form = FormEditarPerfilProveedor(data, instance = proveedor)
+            form = FormEditarPerfilProveedor(data)
 
         context = {'form' : form }
 
@@ -235,36 +237,35 @@ class EditarPerfil(View):
 
         if(usuario.es_cliente):
             cliente = CLIENTE.objects.get(usuario = usuario)
-            form = FormEditarPerfilCliente(request.POST, instance = cliente)
+            form = FormEditarPerfilCliente(request.POST)
 
             if form.is_valid():
                 try:
-                    cliente = form.save()
                     perfil.pseudonimo = form.cleaned_data['pseudonimo']
                     perfil.save()
+                    cliente.telefono = form.cleaned_data['telefono']
+                    cliente.save()
                 except IntegrityError:
                     print('Integriry Error\n')
             else:
-                return render(request, 'editarPerfil',{'form': form})
                 print('Error en formulario weon\n')
+                return render(request, 'menu/editarPerfil.html',{'form': form})
 
-
-                # cuando encuentra error pasa por aqui, enviar un mensaje
         else:
             proveedor = PROVEEDOR.objects.get(usuario = usuario)
-            form = FormEditarPerfilProveedor(request.POST, instance = proveedor)
+            form = FormEditarPerfilProveedor(request.POST)
 
             if form.is_valid():
                 try:
-                    proveedor = form.save()
                     perfil.pseudonimo = form.cleaned_data['pseudonimo']
                     perfil.save()
+                    proveedor.rif = form.cleaned_data['rif']
+                    proveedor.save()
                 except IntegrityError:
                     print('Integrity Error\n')
             else:
-                return render(request, 'editarPerfil',{'form': form})
                 print('Error en el formulario\n')
-                # cuando falla pasa por aqui, dar mensaje
+                return render(request, 'menu/editarPerfil.html',{'form': form})
 
         #return render(request, 'editarPerfil',{'form': form})
         return redirect('/menu/perfil')
