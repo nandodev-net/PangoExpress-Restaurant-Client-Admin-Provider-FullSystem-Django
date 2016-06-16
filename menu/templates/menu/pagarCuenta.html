@@ -10,7 +10,10 @@
         <h3>Confirme el PIN de su billetera</h3>
         <form action = "" method = "post">
             {% csrf_token %}
-            {% bootstrap_form form %}
+                <p>{% bootstrap_label "PIN" %}
+                <span style="color:red">*<span>
+                {% bootstrap_field form.PIN  show_label=False %}
+                </p> 
             <input type = "submit" value = "Confirmar"/>
         </form>
     {% else %}
