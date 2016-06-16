@@ -5,7 +5,14 @@
 {% block main %}
 <form action = "" method = "post">
     {% csrf_token %}
-    {% bootstrap_form form %}
+	<p>{% bootstrap_label "Pseudónimo" %}		
+		<span style="color:red">*<span>
+		{% bootstrap_field form.pseudonimo  show_label=False %}
+	</p> 
+    <p>{% bootstrap_label "Contraseña" %}
+		<span style="color:red">*<span>
+		{% bootstrap_field form.passwd  show_label=False %}
+	</p>
     <input type = "submit" value = "Iniciar Sesion"/>
 </form>
 {% endblock %}
