@@ -4,7 +4,11 @@
 {% block main %}
 <form action = "" method = "post">
     {% csrf_token %}
-    {% bootstrap_form form %}
+	{% bootstrap_field form.nombre %}
+    {% bootstrap_field form.apellido %}
+   	<p>{% bootstrap_label "PIN" %}
+		<span style="color:red">*<span>
+	{% bootstrap_field form.PIN  show_label=False %}
     <input type = "submit" value = "Crear"/>
 </form>
 {% endblock %}
