@@ -2,33 +2,27 @@
 {% load bootstrap3 %}
 
 {% block main %}
-    <h1>MENU</h1>
-    {% if all_platos %}
-    {# Muestro platos como una lista de bootstrap #}
-        <ul class="list-group">
-        {% for plato in all_platos %}
-            <li class="list-group-item">
-                <a class="" href="{% url 'menu:detail' plato.id %}">{{ plato.nombre }}</a>
-                {% if usuario and usuario.es_cliente %}
-                    <a class="btn btn-default" href="ordenar/{{ plato.id }}">Ordenar</a>
-                {% endif %}
-                <span class="badge">Bs.{{plato.precio}}</span> </a>
-            </li>
+    {# Verifico que haya items en el menu #}
+    {% if vergas %}
+        <ul>
+        {% for menu, platos in vergas.items %}
+            {# Nombre del menu #}
+            <h1> {{ menu }}</h1>
+            {% for plato in platos %}
+                {# Platos en el menu #}
+                <li class="list-group-item">
+                    <a class="" href="{% url 'menu:detail' plato.id %}">{{ plato.nombre }}</a>
+                    {% if usuario and usuario.es_cliente %}
+                        <a class="btn btn-default" href="ordenar/{{ plato.id }}">Ordenar</a>
+                    {% endif %}
+                    <span class="badge">Bs.{{plato.precio}}</span>
+                </li>
+            {% endfor %}
         {% endfor %}
         </ul>
 
+    {# Si no hay items en el menu muestro esto #}
     {% else %}
-        <h3>Sin disponibilidad de menu</h3>
+        <h2> Sin disponibilidad de menu </h2>
     {% endif %}
-
-    <!--
-    {% if menus %}
-        {% for menu in menus %}
-            <h1>{{ menu.nombre }}:</h1>
-        {% endfor %}
-    {% else %}
-        <h3>Sin disponibilidad de menu</h3>
-
-    {% endif %}
-    -->
 {% endblock %}

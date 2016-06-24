@@ -4,11 +4,15 @@ from django.views.generic import View
 from django.db import IntegrityError
 
 from .forms import *
-#from .models import PERFIL, USUARIO, CLIENTE, PROVEEDOR, PLATO, CUENTA, PedidoEnCuenta
 from .models import *
 
 from .BilleteraElectronica import *
 import datetime
+
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import check_password
+
+from django.forms import modelformset_factory
 
 
 def index(request):
@@ -16,20 +20,39 @@ def index(request):
     return render(request, 'menu/slider.html', {'all_platos': all_platos})
 
 def menu(request):
-    all_platos = PLATO.objects.all()
+    menues = MENU.objects.filter(activo = True)
+    relaciones = []
+    vergas = {}
+    platos_disponibles = PLATO.objects.raw('SELECT DISTINCT(p.nombre), p.id  \
+                                            FROM menu_Plato as p, menu_Ingredientes as i,  menu_Inventario as i2 \
+                                            WHERE  i.producto_id = i2.producto_id AND i.cantidad <= i2.cantidad AND i.plato_id = p.id '
+                                           )
+    platos_disponibles_nombres = []
+    for plato in platos_disponibles:
+        print (plato.nombre)
+        platos_disponibles_nombres.append(plato.nombre)
+
+    for menu in menues:
+        vergas[menu.nombre] = []
+        relaciones += Plato_en_menu.objects.filter(menu = menu)
+
+    print(platos_disponibles)
+    for relacion in relaciones:
+        platos = PLATO.objects.filter(id = relacion.plato.id)
+        for plato in platos:
+            if plato.nombre in platos_disponibles_nombres:
+                vergas[relacion.menu.nombre].append(plato)
+
     try:
         if(request.session['pid'] != -1):
             perfil = PERFIL.objects.get(id=request.session['pid'])
             usuario = USUARIO.objects.get(perfil=perfil)
-            return render(request,'menu/menu.html', {'all_platos' : all_platos, 'usuario':usuario})
+            return render(request,'menu/menu.html', {'vergas' : vergas, 'menues' : menues, 'usuario':usuario})
         else:
-            return render(request, 'menu/menu.html', {'all_platos': all_platos})
+            return render(request, 'menu/menu.html', {'vergas': vergas, 'menues' : menues})
 
     except:
-        return render(request, 'menu/menu.html', {'all_platos': all_platos})
-
-        
-    
+        return render(request, 'menu/menu.html', {'vergas': vergas, 'menues' : menues})
 
 
 def detail(request, id_plato):
@@ -179,6 +202,8 @@ def ver_perfil(request):
                     'es_cliente' : usuario.es_cliente,
                     'logged' : True
                     }
+        if(perfil.is_staff):
+            context['is_staff'] = perfil.is_staff
 
         if(usuario.es_cliente):
             extra = CLIENTE.objects.get(usuario=usuario)
@@ -300,29 +325,47 @@ class IniciarSesion(View):
 
     def post(self, request):
         form = FormIniciarSesion(request.POST)
+        staff_users = User.objects.filter(is_superuser = True)
+        is_staff = False
 
         if form.is_valid():
-            try:
-                perfil = PERFIL.objects.get(pseudonimo = form.cleaned_data['pseudonimo'])
-                usuario = USUARIO.objects.get(perfil = perfil)
-
-                if(usuario.contrasenia == form.cleaned_data['passwd']):
+            for user in staff_users:
+                if (user.username == form.cleaned_data['pseudonimo'] and
+                    check_password(form.cleaned_data['passwd'], user.password)):
+                    is_staff = True
+            if(is_staff):
+                try:
+                    perfil = PERFIL.objects.get(pseudonimo=form.cleaned_data['pseudonimo'])
+                    usuario = USUARIO.objects.get(perfil=perfil)
+                    perfil.is_staff = True
+                    perfil.save()
                     request.session['logged'] = True
                     request.session['pid'] = perfil.id
                     return redirect('/menu/')
 
-                else:
-                    print('No coinciden perrito')
+                except PERFIL.DoesNotExist:
+                    return redirect('/menu/registro/')
+            else:
+                try:
+                    perfil = PERFIL.objects.get(pseudonimo = form.cleaned_data['pseudonimo'])
+                    usuario = USUARIO.objects.get(perfil = perfil)
+
+                    if(usuario.contrasenia == form.cleaned_data['passwd']):
+                        request.session['logged'] = True
+                        request.session['pid'] = perfil.id
+                        return redirect('/menu/')
+
+                    else:
+                        print('No coinciden perrito')
+                        request.session['logged'] = False
+                        request.session['pid'] = -1
+                        return redirect('/menu/iniciarsesion')
+
+                except PERFIL.DoesNotExist:
+                    print('El perfil no existe')
                     request.session['logged'] = False
                     request.session['pid'] = -1
                     return redirect('/menu/iniciarsesion')
-
-            except PERFIL.DoesNotExist:
-                print('El perfil no existe')
-                request.session['logged'] = False
-                request.session['pid'] = -1
-                return redirect('/menu/iniciarsesion')
-
 
         else:
             print('Error en formulario\n')
@@ -457,12 +500,15 @@ class RecargarBilletera(View):
 ''' Realiza operaciones necesaras para registrar un pedido '''
 def hacer_pedido(request, id_plato):
     plato = PLATO.objects.get(id = id_plato)
+    ingredientes = Ingredientes.objects.filter(plato = plato)
 
     perfil = PERFIL.objects.get(id=request.session['pid'])
     usuario = USUARIO.objects.get(perfil=perfil)
     cliente = CLIENTE.objects.get(usuario=usuario)
 
     try:
+        # Verifico si el cliente ya tiene una cuenta, sino la tiene
+        # entonces la creo.
         try:
             cuenta = CUENTA.objects.get(cliente = cliente,
                                         pagada = False
@@ -472,10 +518,20 @@ def hacer_pedido(request, id_plato):
                             total = 0,
                             pagada = False
                             )
+            cuenta.save()
 
+        # Genero el pedido
         pedido = PedidoEnCuenta(plato = plato,
                                 cuenta = cuenta
                                 )
+
+        # Resto ingredientes del inventario
+        for ingrediente in ingredientes:
+            cantidad_inv = Inventario.objects.get(producto = ingrediente.producto)
+            cantidad_inv.cantidad -= ingrediente.cantidad
+            cantidad_inv.save()
+
+        # Verifico si el cliente ya pidio el mismo plato
         if(not PedidoEnCuenta.objects.filter(plato = pedido.plato, cuenta=cuenta).exists()):
             cuenta.total += pedido.plato.precio
             cuenta.save()
@@ -628,6 +684,108 @@ def eliminar_producto_inventario(request, id_ofrece):
     ofrece.delete()
 
     return redirect('/menu/perfil/inventario/')
+
+def ver_transacciones_restaurant(request):
+    context = {}
+
+    if request.method == 'GET':
+        form = FormSeleccionarMes()
+        context['form'] = form
+    elif request.method == 'POST':
+        form = FormSeleccionarMes(request.POST)
+        if form.is_valid():
+            context['form'] = form
+            transaccionesIngresos = TRANSACCION.objects.filter(tipo='Compra',
+                                                        fecha__gte = form.cleaned_data['fecha1'],
+                                                        fecha__lte = form.cleaned_data['fecha2'])
+
+            transaccionesEgresos = TRANSACCION.objects.filter(tipo='Pedido',
+                                                        fecha__gte = form.cleaned_data['fecha1'],
+                                                        fecha__lte = form.cleaned_data['fecha2'])
+            context['transaccionesIngresos'] = transaccionesIngresos
+            context['transaccionesEgresos'] = transaccionesEgresos
+            transacciones = TRANSACCION.objects.filter(fecha__gte = form.cleaned_data['fecha1'],
+                                                       fecha__lte = form.cleaned_data['fecha2'])
+            context['transacciones'] = transacciones
+
+
+            totalIngresos = 0
+            totalEgresos = 0
+            total = 0
+            for transIng in transaccionesIngresos:
+                totalIngresos += transIng.monto
+
+            for transEgr in transaccionesEgresos:
+                totalEgresos += transEgr.monto
+
+            for trans in transacciones:
+                total += trans.monto
+
+            context['totalIngresos'] = totalIngresos
+            context['totalEgresos'] = totalEgresos
+            context['tota'] = total
+    else:
+        print('???')
+    return render(request, 'menu/verTransaccionesRestaurant.html', context)
+
+
+class HacerPedidos(View):
+
+    def get(self, request):
+        form = FormSeleccionarProveedor()
+        return render(request, 'menu/hacerPedidos.html', {'form' : form})
+
+    def post(self, request):
+        form = FormSeleccionarProveedor(request.POST)
+        formProductos = modelformset_factory(Ofrece,
+                                             form=FormSeleccionarProductos,
+                                             extra=0
+                                             )
+        formSetProductos = formProductos(request.POST)
+
+        if form.is_valid():
+            proveedor = form.cleaned_data['proveedor']
+            # habra que hacer una lista de formularios para poner todos
+            # los poductos, no es importante la cantidad de formularios ya que
+            # siempre sera la misma cantidad (porque es el mismo inventario)
+            relaciones = Ofrece.objects.filter(proveedor = proveedor)
+            formSetProductos = formProductos(queryset = relaciones)
+
+        if(formSetProductos.is_valid()):
+            productosAComprar = {}
+            total = 0
+            for form2 in formSetProductos:
+                productosAComprar[form2.instance.producto.nombre] = (form2.cleaned_data['cantidad'],
+                                                                     form2.instance.precio,
+                                                                     form2.cleaned_data['cantidad'] * form2.instance.precio)
+                total += form2.instance.precio * form2.cleaned_data['cantidad']
+
+            context = {'productosAComprar' : productosAComprar,
+                       'total' : total
+                       }
+
+            return render(request, 'menu/confirmarPedido.html', context)
+
+        context = {'form' : form,
+                   'formProductos' : formSetProductos
+                   }
+
+        return render(request, 'menu/hacerPedidos.html', context)
+
+
+def hacer_compra(request, monto):
+    monto = monto.replace(',', '.')
+    trans = TRANSACCION(establecimiento = None,
+                        billetera = None,
+                        tipo = 'Pedido',
+                        monto = monto,
+                        fecha = datetime.datetime.now()
+                        )
+    trans.save()
+
+    return redirect('/menu/perfil/')
+
+
 
 
 ''' Dummy para hacer pruebas con el layout '''

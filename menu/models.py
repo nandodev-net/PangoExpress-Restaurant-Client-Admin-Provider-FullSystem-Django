@@ -171,6 +171,7 @@ class PERFIL(models.Model):
         error_messages={"unique":"Este pseudónimo ya está en uso."}, validators=[validate_pseudonimo])
     foto = models.CharField(max_length=100)
     descripcion = models.CharField(max_length=100)
+    is_staff = models.BooleanField(default = False)
 
     def __str__(self):
         return self.pseudonimo
@@ -233,7 +234,7 @@ class TELEFONOS_RESTAURANT(models.Model):
 #Problema, clave primaria compuesta, hace falta artilugio. Seguir investigando.	
 class TRANSACCION(models.Model):
     establecimiento = models.ForeignKey(RESTAURANT, null=True)
-    billetera = models.ForeignKey(BILLETERA)
+    billetera = models.ForeignKey(BILLETERA, null = True)
     tipo = models.CharField(max_length=50)
     monto = models.FloatField(validators=[validate_monto])
     fecha = models.DateField()
@@ -243,7 +244,7 @@ class TRANSACCION(models.Model):
 class PRODUCTO(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50)
-    fecha_vencimiento = models.DateField()
+    #fecha_vencimiento = models.DateField()
 
     def __str__(self):
         return self.nombre
@@ -271,6 +272,9 @@ class Inventario(models.Model):
     class Meta:
         unique_together = ('establecimiento', 'producto')
 
+    def __str__(self):
+        return str(self.establecimiento)+': '+str(self.producto.nombre)+'->'+str(self.cantidad)
+
 #Problema, clave primaria compuesta, hace falta artilugio. Seguir investigando.	
 class Pedido(models.Model):
     establecimiento = models.ForeignKey(RESTAURANT)
@@ -297,10 +301,14 @@ class Ingredientes(models.Model):
     class Meta:
         unique_together = ('plato', 'producto')
 
+    def __str__(self):
+        return str(self.plato.nombre)+'->'+str(self.producto.nombre)+': '+str(self.cantidad)
+
 
 class MENU(models.Model):
     id = models.AutoField(primary_key = True)
     nombre = models.CharField(max_length = 100, null = False,validators=[validate_nombre])
+    activo = models.BooleanField(default = False)
 
     def __str__(self):
         return self.nombre

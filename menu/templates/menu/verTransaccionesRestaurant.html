@@ -1,0 +1,47 @@
+{% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
+
+{% block main %}
+    <form method = "post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type = "submit" value = "Leksgou"/>
+    </form>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th> Descripcion </th>
+                <th> Fecha </th>
+                <th> Ingresos </th>
+                <th> Egresos </th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for transaccion in transacciones %}
+            {% if transaccion.tipo == 'Compra' %}
+                <tr>
+                    <td>{{ transaccion.tipo }}</td>
+                    <td>{{ transaccion.fecha }}</td>
+                    <td>{{ transaccion.monto }}</td>
+                    <td></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>{{ transaccion.tipo }}</td>
+                    <td>{{ transaccion.fecha }}</td>
+                    <td></td>
+                    <td>{{ transaccion.monto }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        <tr>
+            <td>Total </td>
+            <td></td>
+            <td>{{ totalIngresos }}</td>
+            <td>{{ totalEgresos }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

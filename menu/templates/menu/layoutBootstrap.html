@@ -68,13 +68,6 @@
         {% block main %}
         {# Display django.contrib.messages as Bootstrap alerts #}
         {% bootstrap_messages %}
-        <form method="post" class="form">
-          {% csrf_token %}
-          {% bootstrap_form form %}
-          {% buttons %}
-            <button type="submit" class="btn btn-primary"> {% bootstrap_icon "star" %}Submit </button>
-          {% endbuttons %}
-        </form>
         {% endblock %}
     </section> {# Finaliza la seccion main #}
 

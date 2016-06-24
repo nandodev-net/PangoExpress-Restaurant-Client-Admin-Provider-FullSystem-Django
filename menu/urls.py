@@ -60,6 +60,15 @@ urlpatterns = [
 	#/menu/cerrarsesion/
 	url(r'^cerrarsesion/$', views.cerrar_sesion, name = 'cerrar_sesion'),
 
+    #/menu/transacciones_rest/
+	url(r'^transacciones_rest/$', views.ver_transacciones_restaurant, name = 'transacciones_restaurant'),
+
+    #/menu/hacer_pedidos/
+	url(r'^hacer_pedidos/$', views.HacerPedidos.as_view(), name = 'hacer_pedidos'),
+
+    #/menu/confirmar_compra/
+	url(r'^confirmar_compra/(?P<monto>[0-9]+,[0-9]+)/$', views.hacer_compra, name = 'aux_confirm'),
+
 	#/menu/layoutbootstrap/
 	url(r'^layoutbootstrap/$', views.layout_bootstrap, name = 'layout_bootstrap'),
 

@@ -1,0 +1,45 @@
+{% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
+
+{% block main %}
+
+    <form method = 'post'>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type = "submit" class="btn btn-default" value = "Mostrar Oferta"/>
+    </form>
+    <!--
+    {% if productosQueOfrece %}
+        {% for producto in productosQueOfrece %}
+            <p> {{ producto.producto.nombre }} </p>
+        {% endfor %}
+    {% endif %}
+    -->
+    {% if formProductos %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-md-6"> Producto </th>
+                    <th class="col-md-1"> Cantidad </th>
+                </tr>
+            </thead>
+
+            <form method="post">
+                {{ formProductos.management_form }}
+                <tbody>
+                    {% for form2 in formProductos %}
+                        <tr>
+                            <th class="col-md-6"> {{ form2.instance.producto.nombre }} </th>
+                            <th class="col-md-1">
+                                {% csrf_token %}
+                                {% bootstrap_form form2 %}
+                            </th>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <input type = "submit" class="btn btn-default" value = "Realizar Pedido"/>
+            </form>
+        </table>
+    {% endif %}
+
+{% endblock %}
