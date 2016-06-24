@@ -84,6 +84,11 @@ def validate_monto(monto):
             _('%(monto)s Monto inválido, debe ser un monto positivo.'),
             params={'monto': monto},
             )
+    elif monto == 666:
+        raise ValidationError(
+            _('%(monto)s Monto inválido, no se meta con cosas del diablo'),
+            params={'monto': monto}
+        )
 
 def validate_pseudonimo(pseudonimo):
     for x in pseudonimo:
@@ -92,6 +97,39 @@ def validate_pseudonimo(pseudonimo):
             _('%(pseudonimo)s No es válido, no debe tener espacios.'),
             params={'pseudonimo': pseudonimo},
             )
+
+def validate_tarjeta(numero):
+    try:
+        aux = int(numero)
+        if(aux<=0 or len(numero) != 16 or numero[0] == '+'):
+            raise ValidationError(
+                _('%(numero)s No es válido, debe ser un número de tarjeta válido.'),
+                params={'numero': numero},
+        )
+    except:
+        raise ValidationError(
+            _('%(numero)s No es válido, debe ser un número de tarjeta válido.'),
+            params={'numero': numero},
+        )
+
+def validate_pintarjeta(pin):
+    try:
+        aux = int(pin)
+        print('converti int')
+        print(aux == 666)
+        print(aux)
+        print(pin)
+        if (aux <= 0 or len(pin) != 3 or pin[0] == '+'):
+            raise ValidationError(
+                _('%(pin)s No es válido, debe ser un pin válido.'),
+                params={'pin': pin}
+            )
+    except:
+        print("culo")
+        raise ValidationError(
+            _('%(pin)s No es válido, debe ser un pin válido.'),
+            params={'pin': pin}
+        )
 
 
 months={
@@ -189,6 +227,9 @@ class FormCrearBilletera(forms.ModelForm):
 
 class FormRecargaBilletera(forms.Form):
     PIN = forms.CharField(max_length=50)
+    num_tarjeta = forms.CharField(max_length=16, validators = [validate_tarjeta])
+    tipo_tarjeta = forms.ChoiceField( choices = [(1, 'Visa'), (2, 'MasterCard')])
+    pin_tarjeta = forms.CharField(max_length=3, validators = [validate_pintarjeta])
     monto = forms.FloatField(label='Monto', validators = [validate_monto])
 
 class FormConfirmacionPIN(forms.Form):
@@ -202,3 +243,21 @@ class FormAgregarProductoProveedor(forms.ModelForm):
         model = Ofrece
         fields = ['producto', 'precio']
 
+class FormSeleccionarMes(forms.Form):
+
+    fecha1 = forms.DateField(widget= forms.widgets.SelectDateWidget(years=range(2014, 2016), months=months),
+                             label='Desde: ')
+    fecha2 = forms.DateField(widget= forms.widgets.SelectDateWidget(years=range(2014, 2017), months=months),
+                             label='Hasta: ')
+
+
+class FormSeleccionarProveedor(forms.Form):
+
+    proveedor = forms.ModelChoiceField(PROVEEDOR.objects, label='Seleccione un proveedor')
+
+class FormSeleccionarProductos(forms.ModelForm):
+    cantidad = forms.IntegerField(label='', initial=0)
+
+    class Meta:
+        model = Ofrece
+        fields =[]
