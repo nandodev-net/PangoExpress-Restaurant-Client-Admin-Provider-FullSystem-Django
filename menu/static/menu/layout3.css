@@ -1,0 +1,69 @@
+@font-face {
+  font-family: "NIAGENG";
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/NIAGENG.eot");
+  src: url("fonts/NIAGENG.otf"), url("fonts/NIAGENG.ttf"); }
+
+@font-face {
+  font-family: "PRISTINA";
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/PRISTINA.eot");
+  src: url("fonts/PRISTINA.otf"), url("fonts/PRISTINA.ttf"); }
+
+body{
+	/*background: #d3d3d3 url("images/pangoBackground");*/
+    background: #d3d3d3 url('images/pan.jpg');
+    top right no-repeat; background-attachment:fixed;
+}
+
+header {
+    width: 77%;
+    background: #eadead;
+    margin: auto;       /* Lo centra */
+    margin-top: 3%;
+    padding: 1% 3%;
+    border-radius: 5px;
+}
+
+header h1{
+    text-align: center;
+    font-size: 300%;
+}
+
+
+.navbar-loguito{
+    width: 2.1em;
+    filter:grayscale(100%);
+}
+
+a.change:hover, a.change2:hover, a img.navbar-loguito:hover{
+    filter:brightness(100%);
+
+}
+
+.navbar-brand{
+    margin-top: -0.4em;
+
+}
+
+.change{
+    font-family: NIAGENG;
+    font-size: 1.5em;
+
+}
+.change2{
+    font-family: PRISTINA;
+    font-size: 1.5em;
+
+}
+
+/*
+section ul li p{
+    float: right;
+}
+
+section ul li a{
+    float: left;
+}*/

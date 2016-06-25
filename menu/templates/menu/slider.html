@@ -7,7 +7,7 @@
     {% load staticfiles %}
     {% block stylesheets %}
     <link rel="stylesheet" href="{%static 'menu/Design.css'%}" />
-    <link rel = "stylesheet" type ="text/css" href="{% static 'menu/layout.css' %}" />
+    <link rel = "stylesheet" type ="text/css" href="{% static 'menu/layout3.css' %}" />
 
     {% endblock %}
 
@@ -92,6 +92,17 @@
 <body onload="Load()">
     {%endblock%}
     {%block main%}
+
+
+
+
+
+
+
+
+
+
+
     <div id="slider">
         <div id="imgs">
             <!-- aqui van las imagenes -->
@@ -129,6 +140,12 @@
 
             </div>
         </div>
+    </div>
+
+    <div class="mensajePrincipal fullScreen">
+        <h1 class="titulo triangle"><span>Bienvenidos</span></h1>
+        <h2>Lo mejor de la gastronomía en un ambiente para toda la familia...</h2>
+        <p>Lo mejor de la gastronomía en un ambiente para toda la familia...</p>
     </div>
 {%endblock%}
 
