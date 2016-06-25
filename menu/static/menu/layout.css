@@ -1,6 +1,7 @@
 body{
 	/*background: #d3d3d3 url("images/pangoBackground");*/
     background: #d3d3d3 url('images/pan.jpg');
+    top right no-repeat; background-attachment:fixed;
 }
 
 header {
@@ -32,6 +33,15 @@ section h2 {
 
 section ul li {
     margin: 10px;
+}
+
+.navbar-loguito{
+    width: 2.1em;
+    filter:grayscale(100%);
+}
+
+.navbar-brand{
+    margin-top: -0.4em;
 }
 
 

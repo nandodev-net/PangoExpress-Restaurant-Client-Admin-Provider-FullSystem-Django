@@ -2,6 +2,23 @@
 
 {% block title %}{{ title }} | PangoExpress Administracion{% endblock %}
 {% block extrastyle %}
+    {# Vergas para que muestre acentos y se adapte a movil #}
+    <meta charset = "utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {# Vergas de bootstrap #}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    {# Vergas de nuestro CSS #}
+    {% block stylesheets %}
+        {% load staticfiles %}
+        <link rel = "stylesheet" type ="text/css" href="{% static 'menu/layout2.css' %}" />
+    {% endblock %}
+
+
+
 <style>
 	#header {
 		background-color: #FB9209;
@@ -27,7 +44,7 @@
 {%endblock%}
 
 {% block branding %}
-<h1 id="site-name"><a href="{% url 'admin:index' %}">PangoExpress Administracion</a></h1>
+<h1 id="site-name"><a href="{% url 'admin:index' %}"><span><img class= "navbar-loguito" src="{%static 'menu/images/Untitled-1.png'%}"></span>PangoExpress Administracion</a></h1>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}
