@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "NIAGENG";
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/NIAGENG.eot");
+  src: url("fonts/NIAGENG.otf"), url("fonts/NIAGENG.ttf"); }
+
+@font-face {
+  font-family: "PRISTINA";
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/PRISTINA.eot");
+  src: url("fonts/PRISTINA.otf"), url("fonts/PRISTINA.ttf"); }
+
 body{
 	/*background: #d3d3d3 url("images/pangoBackground");*/
     background: #d3d3d3 url('images/pan.jpg');
@@ -40,10 +54,26 @@ section ul li {
     filter:grayscale(100%);
 }
 
-.navbar-brand{
-    margin-top: -0.4em;
+a.change:hover, a.change2:hover, a img.navbar-loguito:hover{
+    filter:brightness(100%);
+
 }
 
+.navbar-brand{
+    margin-top: -0.4em;
+
+}
+
+.change{
+    font-family: NIAGENG;
+    font-size: 1.5em;
+
+}
+.change2{
+    font-family: PRISTINA;
+    font-size: 1.5em;
+
+}
 
 /*
 section ul li p{
