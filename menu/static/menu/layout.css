@@ -52,6 +52,7 @@ section ul li {
 .navbar-loguito{
     width: 2.1em;
     filter:grayscale(100%);
+
 }
 
 a.change:hover, a.change2:hover, a img.navbar-loguito:hover{

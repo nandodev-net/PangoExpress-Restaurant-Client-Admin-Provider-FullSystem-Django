@@ -197,6 +197,8 @@ class BILLETERA(models.Model):
     nombre = models.CharField(max_length=50, validators=[validate_nombre])
     apellido = models.CharField(max_length=50, validators=[validate_nombre])
     saldo = models.FloatField()
+    def __str__(self):
+        return self.PIN
 
 class CLIENTE(models.Model):
     usuario = models.ForeignKey(USUARIO, primary_key=True)

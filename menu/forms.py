@@ -226,11 +226,12 @@ class FormCrearBilletera(forms.ModelForm):
         fields = ['nombre', 'apellido', 'PIN']
 
 class FormRecargaBilletera(forms.Form):
-    PIN = forms.CharField(max_length=50)
-    num_tarjeta = forms.CharField(max_length=16, validators = [validate_tarjeta])
-    tipo_tarjeta = forms.ChoiceField( choices = [(1, 'Visa'), (2, 'MasterCard')])
-    pin_tarjeta = forms.CharField(max_length=3, validators = [validate_pintarjeta])
     monto = forms.FloatField(label='Monto', validators = [validate_monto])
+    numero_de_tarjeta = forms.CharField(max_length=16, validators = [validate_tarjeta])
+    pin_de_la_tarjeta = forms.CharField(max_length=3, validators = [validate_pintarjeta])
+    tipo_de_tarjeta = forms.ChoiceField( choices = [(1, 'Visa'), (2, 'MasterCard')])
+    PIN = forms.CharField(max_length=50)
+
 
 class FormConfirmacionPIN(forms.Form):
     PIN = forms.CharField(max_length=50)

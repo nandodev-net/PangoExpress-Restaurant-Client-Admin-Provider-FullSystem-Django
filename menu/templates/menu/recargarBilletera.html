@@ -7,15 +7,7 @@
     {% endif %}
 <form action = "" method = "post">
     {% csrf_token %}
-    <p>{% bootstrap_label "PIN" %}
-	<span style="color:red">*<span>
-	{% bootstrap_field form.PIN  show_label=False %}
-	</p> 
-	<p>{% bootstrap_label "Monto" %}
-	<span style="color:red">*<span>
-	{% bootstrap_field form.monto  show_label=False %}
-	</p> 
-
+    {%bootstrap_form form%}
     <input type = "submit" value = "Recargar"/>
 </form>
 
