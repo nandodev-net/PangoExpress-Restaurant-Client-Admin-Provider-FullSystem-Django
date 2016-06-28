@@ -44,6 +44,9 @@ urlpatterns = [
 
     #/menu/perfil/inventario/eliminar/23
     url(r'^perfil/inventario/eliminar/(?P<id_ofrece>[0-9]+)/$', views.eliminar_producto_inventario, name="eliminar_producto_inventario"),
+
+    #/menu/perfil/inventario/modificar/23
+    url(r'^perfil/inventario/modificar/(?P<id_ofrece>[0-9]+)/$', views.Modificar_Producto_Inventario.as_view(), name="Modificar_Producto_Inventario"),
     
     #/menu/verpedido
     url(r'^verpedido/$', views.ver_pedido, name = 'ver_pedido'),
