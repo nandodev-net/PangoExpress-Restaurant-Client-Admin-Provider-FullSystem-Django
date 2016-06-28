@@ -228,7 +228,7 @@ class FormCrearBilletera(forms.ModelForm):
 class FormRecargaBilletera(forms.Form):
     monto = forms.FloatField(label='Monto', validators = [validate_monto])
     numero_de_tarjeta = forms.CharField(max_length=16, validators = [validate_tarjeta])
-    pin_de_la_tarjeta = forms.CharField(max_length=3, validators = [validate_pintarjeta])
+    pin_tarjeta = forms.CharField(label='Código de Seguridad', max_length=3, validators = [validate_pintarjeta])
     tipo_de_tarjeta = forms.ChoiceField( choices = [(1, 'Visa'), (2, 'MasterCard')])
     PIN = forms.CharField(max_length=50)
 

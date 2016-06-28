@@ -7,7 +7,27 @@
     {% endif %}
 <form action = "" method = "post">
     {% csrf_token %}
-    {%bootstrap_form form%}
+    <p>{% bootstrap_label "PIN" %}
+    <span style="color:red">*<span>
+    {% bootstrap_field form.PIN  show_label=False %}
+    </p> 
+    <p>{% bootstrap_label "Número de Tarjeta" %}
+    <span style="color:red">*<span>
+    {% bootstrap_field form.num_tarjeta  show_label=False %}
+    </p> 
+    <p>{% bootstrap_label "Tipo de Tarjeta" %}
+    <span style="color:red">*<span>
+    {% bootstrap_field form.tipo_tarjeta  show_label=False %}
+    </p> 
+    <p>{% bootstrap_label "Código de Seguridad" %}
+    <span style="color:red">*<span>
+    {% bootstrap_field form.pin_tarjeta  show_label=False %}
+    </p> 
+    <p>{% bootstrap_label "Monto" %}
+    <span style="color:red">*<span>
+    {% bootstrap_field form.monto  show_label=False %}
+    </p> 
+
     <input type = "submit" value = "Recargar"/>
 </form>
 
