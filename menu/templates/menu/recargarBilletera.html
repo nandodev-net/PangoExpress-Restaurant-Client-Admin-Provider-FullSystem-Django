@@ -13,12 +13,14 @@
     </p> 
     <p>{% bootstrap_label "Número de Tarjeta" %}
     <span style="color:red">*<span>
-    {% bootstrap_field form.num_tarjeta  show_label=False %}
-    </p> 
+    {# bootstrap_field form.num_tarjeta  show_label=False #}
+    {% bootstrap_field form.numero_de_tarjeta  show_label=False %}
+    </p>
     <p>{% bootstrap_label "Tipo de Tarjeta" %}
     <span style="color:red">*<span>
-    {% bootstrap_field form.tipo_tarjeta  show_label=False %}
-    </p> 
+    {# bootstrap_field form.tipo_tarjeta  show_label=False #}
+    {% bootstrap_field form.tipo_de_tarjeta  show_label=False %}
+    </p>
     <p>{% bootstrap_label "Código de Seguridad" %}
     <span style="color:red">*<span>
     {% bootstrap_field form.pin_tarjeta  show_label=False %}

@@ -262,3 +262,9 @@ class FormSeleccionarProductos(forms.ModelForm):
     class Meta:
         model = Ofrece
         fields =[]
+
+class FormModificarProductoProveedor(forms.ModelForm):
+
+	class Meta:
+		model = Ofrece
+		fields = ['precio']

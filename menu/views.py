@@ -679,11 +679,34 @@ class VerInventario(View):
 
         return redirect('/menu/perfil/inventario/')
 
+
 def eliminar_producto_inventario(request, id_ofrece):
     ofrece = Ofrece.objects.get(id=id_ofrece)
     ofrece.delete()
 
     return redirect('/menu/perfil/inventario/')
+
+
+class Modificar_Producto_Inventario(View):
+    def get(self, request, id_ofrece):
+        ofrece = Ofrece.objects.get(id=id_ofrece)
+        form = FormModificarProductoProveedor(instance=ofrece)
+
+        return render(request, 'menu/modificarInventario.html', {'form': form, 'ofrece': ofrece})
+
+    def post(self, request, id_ofrece):
+        ofrece = Ofrece.objects.get(id=id_ofrece)
+        form = FormModificarProductoProveedor(request.POST)
+
+        if form.is_valid():
+            ofrece.precio = form.cleaned_data['precio']
+            ofrece.save()
+
+        else:
+            print('Formulario invalido')
+
+        return redirect('/menu/perfil/inventario/')
+
 
 def ver_transacciones_restaurant(request):
     context = {}
@@ -784,8 +807,6 @@ def hacer_compra(request, monto):
     trans.save()
 
     return redirect('/menu/perfil/')
-
-
 
 
 ''' Dummy para hacer pruebas con el layout '''
