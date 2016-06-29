@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a655a333-3386-4646-8bb1-f31095ea22ad" name="Default" comment=".filter">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/menu/templates/menu/verNotificaciones.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/menu/templates/menu/verPedidoProve.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu/forms.py" afterPath="$PROJECT_DIR$/menu/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu/templates/menu/recargarBilletera.html" afterPath="$PROJECT_DIR$/menu/templates/menu/recargarBilletera.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu/templates/menu/verInventario.html" afterPath="$PROJECT_DIR$/menu/templates/menu/verInventario.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu/models.py" afterPath="$PROJECT_DIR$/menu/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu/templates/menu/layoutBootstrap.html" afterPath="$PROJECT_DIR$/menu/templates/menu/layoutBootstrap.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu/templates/menu/verTransaccionesRestaurant.html" afterPath="$PROJECT_DIR$/menu/templates/menu/verTransaccionesRestaurant.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu/urls.py" afterPath="$PROJECT_DIR$/menu/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menu/views.py" afterPath="$PROJECT_DIR$/menu/views.py" />
     </list>
@@ -36,18 +38,18 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/menu/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4428">
-              <caret line="246" column="5" selection-start-line="246" selection-start-column="5" selection-end-line="246" selection-end-column="5" />
+            <state relative-caret-position="431">
+              <caret line="346" column="47" selection-start-line="346" selection-start-column="47" selection-end-line="346" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/menu/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1513">
-              <caret line="707" column="51" selection-start-line="707" selection-start-column="51" selection-end-line="707" selection-end-column="51" />
+            <state relative-caret-position="328">
+              <caret line="892" column="26" selection-start-line="892" selection-start-column="26" selection-end-line="892" selection-end-column="26" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
               </folding>
@@ -55,11 +57,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="slider.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/menu/templates/menu/slider.html">
+      <file leaf-file-name="verTransaccionesRestaurant.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/menu/templates/menu/verTransaccionesRestaurant.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2160">
-              <caret line="120" column="24" selection-start-line="120" selection-start-column="24" selection-end-line="120" selection-end-column="24" />
+            <state relative-caret-position="270">
+              <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="confirmarPedido.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/menu/templates/menu/confirmarPedido.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="35" selection-end-column="83" />
               <folding />
             </state>
           </provider>
@@ -69,17 +81,7 @@
         <entry file="file://$PROJECT_DIR$/menu/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="449">
-              <caret line="48" column="4" selection-start-line="48" selection-start-column="4" selection-end-line="48" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="verInventario.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/menu/templates/menu/verInventario.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="79" selection-start-line="6" selection-start-column="79" selection-end-line="6" selection-end-column="79" />
+              <caret line="81" column="38" selection-start-line="81" selection-start-column="38" selection-end-line="81" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -98,21 +100,11 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/menu/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="553">
+            <state relative-caret-position="4788">
               <caret line="269" column="27" selection-start-line="269" selection-start-column="27" selection-end-line="269" selection-end-column="27" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="recargarBilletera.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/menu/templates/menu/recargarBilletera.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -146,21 +138,23 @@
         <option value="$PROJECT_DIR$/menu/static/menu/style.css" />
         <option value="$PROJECT_DIR$/menu/static/menu/layout.css" />
         <option value="$PROJECT_DIR$/PangoExpress/urls.py" />
-        <option value="$PROJECT_DIR$/menu/templates/menu/layoutBootstrap.html" />
         <option value="$PROJECT_DIR$/menu/templates/menu/menu.html" />
         <option value="$PROJECT_DIR$/menu/templates/menu/verPerfil.html" />
         <option value="$PROJECT_DIR$/PangoExpress/settings.py" />
         <option value="$PROJECT_DIR$/menu/templates/menu/hacerPedidos.html" />
         <option value="$PROJECT_DIR$/menu/templates/menu/slider.html" />
-        <option value="$PROJECT_DIR$/menu/templates/menu/confirmarPedido.html" />
-        <option value="$PROJECT_DIR$/menu/templates/menu/verTransaccionesRestaurant.html" />
         <option value="$PROJECT_DIR$/menu/admin.py" />
-        <option value="$PROJECT_DIR$/menu/models.py" />
         <option value="$PROJECT_DIR$/menu/templates/menu/recargarBilletera.html" />
-        <option value="$PROJECT_DIR$/menu/views.py" />
-        <option value="$PROJECT_DIR$/menu/urls.py" />
         <option value="$PROJECT_DIR$/menu/templates/menu/verInventario.html" />
         <option value="$PROJECT_DIR$/menu/forms.py" />
+        <option value="$PROJECT_DIR$/menu/templates/menu/layoutBootstrap.html" />
+        <option value="$PROJECT_DIR$/menu/templates/menu/confirmarPedido.html" />
+        <option value="$PROJECT_DIR$/menu/templates/menu/verNotificaciones.html" />
+        <option value="$PROJECT_DIR$/menu/models.py" />
+        <option value="$PROJECT_DIR$/menu/urls.py" />
+        <option value="$PROJECT_DIR$/menu/templates/menu/verPedidoProve.html" />
+        <option value="$PROJECT_DIR$/menu/views.py" />
+        <option value="$PROJECT_DIR$/menu/templates/menu/verTransaccionesRestaurant.html" />
       </list>
     </option>
   </component>
@@ -253,8 +247,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -329,6 +321,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -522,7 +516,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="24" width="1368" height="721" extended-state="6" />
+    <frame x="-1" y="24" width="1368" height="721" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23279649" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -530,19 +524,19 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -563,23 +557,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/menu/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="33" column="77" selection-start-line="33" selection-start-column="77" selection-end-line="33" selection-end-column="77" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PangoExpress/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="50" column="69" selection-start-line="50" selection-start-column="69" selection-end-line="50" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/menu/templates/menu/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -845,25 +822,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/menu/templates/menu/layoutBootstrap.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1062">
-          <caret line="59" column="28" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/menu/templates/menu/slider.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2160">
           <caret line="120" column="24" selection-start-line="120" selection-start-column="24" selection-end-line="120" selection-end-column="24" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/menu/templates/menu/confirmarPedido.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -874,41 +837,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/menu/templates/menu/verTransaccionesRestaurant.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/menu/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/menu/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4428">
-          <caret line="246" column="5" selection-start-line="246" selection-start-column="5" selection-end-line="246" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/menu/templates/menu/recargarBilletera.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/menu/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="48" column="4" selection-start-line="48" selection-start-column="4" selection-end-line="48" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -923,7 +855,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/menu/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
+        <state relative-caret-position="4788">
           <caret line="269" column="27" selection-start-line="269" selection-start-column="27" selection-end-line="269" selection-end-column="27" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
@@ -931,13 +863,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/menu/templates/menu/layoutBootstrap.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="52" column="67" selection-start-line="52" selection-start-column="67" selection-end-line="52" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/templates/menu/recargarBilletera.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/templates/menu/verNotificaciones.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/templates/menu/confirmarPedido.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="35" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="81" column="38" selection-start-line="81" selection-start-column="38" selection-end-line="81" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="346" column="47" selection-start-line="346" selection-start-column="47" selection-end-line="346" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/templates/menu/verPedidoProve.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="55" column="66" selection-start-line="55" selection-start-column="66" selection-end-line="55" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/menu/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1513">
-          <caret line="707" column="51" selection-start-line="707" selection-start-column="51" selection-end-line="707" selection-end-column="51" />
+        <state relative-caret-position="328">
+          <caret line="892" column="26" selection-start-line="892" selection-start-column="26" selection-end-line="892" selection-end-column="26" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/templates/menu/verTransaccionesRestaurant.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -72,6 +72,15 @@ urlpatterns = [
     #/menu/confirmar_compra/
 	url(r'^confirmar_compra/(?P<monto>[0-9]+,[0-9]+)/$', views.hacer_compra, name = 'aux_confirm'),
 
+    #/menu/notificaciones/
+    url(r'^notificaciones/$', views.mostrar_notificaciones, name = 'notificaciones'),
+
+    #/menu/ver_pedido/
+    url(r'^ver_pedidoprove/(?P<id_pedido>[0-9]+)/$', views.ver_pedidoprove, name = 'ver_pedidoprove'),
+
+    #/menu/enviar_pedido/
+    url(r'^enviar_pedido/(?P<id_pedido>[0-9]+)/$', views.enviar_pedido, name = 'enviar_pedido'),
+
 	#/menu/layoutbootstrap/
 	url(r'^layoutbootstrap/$', views.layout_bootstrap, name = 'layout_bootstrap'),
 

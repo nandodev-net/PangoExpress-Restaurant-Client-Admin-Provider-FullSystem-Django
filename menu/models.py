@@ -245,7 +245,7 @@ class TRANSACCION(models.Model):
 
 class PRODUCTO(models.Model):
     id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=50, unique=True)
     #fecha_vencimiento = models.DateField()
 
     def __str__(self):
@@ -335,3 +335,17 @@ class PedidoEnCuenta(models.Model):
     cuenta = models.ForeignKey(CUENTA)
     class Meta:
         unique_together = ("plato", "cuenta")
+
+class PEDIDOPROVEEDOR(models.Model):
+    proveedor = models.ForeignKey(PROVEEDOR)
+    total = models.FloatField(default = 0)
+    atendido = models.BooleanField(default = False)
+
+class ProductoEnPedido(models.Model):
+    producto = models.ForeignKey(Ofrece)
+    pedido = models.ForeignKey(PEDIDOPROVEEDOR)
+    cantidad = models.IntegerField(default = 0)
+
+    def get_subtotal(self):
+        return self.producto.precio * self.cantidad
+

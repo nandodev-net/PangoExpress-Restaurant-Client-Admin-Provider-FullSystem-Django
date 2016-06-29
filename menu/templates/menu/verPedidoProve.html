@@ -1,0 +1,59 @@
+{% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
+
+{% block main %}
+    <h3> Confirme los datos del pedido </h3>
+    <!--
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="col-md-1">Producto</th>
+                <th class="col-md-1">Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for producto in productos  %}
+            <tr>
+                <td class="col-md-1">{{ producto.producto.producto.nombre }}<td>
+                <td class="col-md-1">{{ producto.cantidad }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <th class="col-md-1">Total: {{ total }}</th>
+        </tr>
+        </tbody>
+    </table>
+    -->
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="col-md-1">Producto</th>
+                <td></td>
+                <th class="col-md-1">Cantidad</th>
+                <th class="col-md-1">Precio</th>
+                <th class="col-md-1">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for producto in productos  %}
+            <tr>
+                <td class="col-md-1">{{ producto.producto.producto.nombre }}<td>
+                <td class="col-md-1">{{ producto.cantidad }}</td>
+                <td class="col-md-1">{{ producto.producto.precio }}</td>
+                <td class="col-md-1">{{ producto.get_subtotal }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <th class="">Total</th>
+            <th class=""></th>
+            <th class=""></th>
+            <th class=""></th>
+            <th class="">{{ total }}</th>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-default" href = "/enviar_pedido/{{ pedido.id }}">Enviar Pedido</a>
+    <a class="btn btn-default" href = "{% url 'menu:notificaciones' %}">Volver</a>
+
+{% endblock %}
