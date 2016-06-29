@@ -29,14 +29,14 @@ def menu(request):
                                            )
     platos_disponibles_nombres = []
     for plato in platos_disponibles:
-        print (plato.nombre)
+        #print (plato.nombre)
         platos_disponibles_nombres.append(plato.nombre)
 
     for menu in menues:
         vergas[menu.nombre] = []
         relaciones += Plato_en_menu.objects.filter(menu = menu)
 
-    print(platos_disponibles)
+    #print(platos_disponibles)
     for relacion in relaciones:
         platos = PLATO.objects.filter(id = relacion.plato.id)
         for plato in platos:
@@ -62,7 +62,35 @@ def detail(request, id_plato):
         if(request.session['pid'] != -1):
             perfil = PERFIL.objects.get(id=request.session['pid'])
             usuario = USUARIO.objects.get(perfil=perfil)
-            return render(request, 'menu/detail.html', {'plato': plato, 'usuario':usuario})
+            puntuaciones = Puntuacion.objects.filter(plato = plato)
+
+            form = FormPuntuarPlato()
+            context = {'plato': plato,
+                       'usuario':usuario,
+                       'form' : form,
+                       'puntuaciones' : puntuaciones
+                       }
+            if request.method == 'POST':
+                form = FormPuntuarPlato(request.POST)
+                if form.is_valid():
+                    try:
+                        puntuacion = Puntuacion.objects.get(usuario = usuario,
+                                                            plato = plato
+                                                            )
+                        puntuacion.puntuacion = form.cleaned_data['puntuacion']
+                        puntuacion.comentario = form.cleaned_data['comentario']
+                    except:
+                        puntuacion = Puntuacion(usuario = usuario,
+                                                plato = plato,
+                                                puntuacion = form.cleaned_data['puntuacion'],
+                                                comentario = form.cleaned_data['comentario']
+                                                )
+                    puntuacion.save()
+                elif form.errors:
+                    print(form.errors)
+
+            return render(request, 'menu/detail.html', context)
+
         else:
             return render(request, 'menu/detail.html', {'plato': plato})
     except:

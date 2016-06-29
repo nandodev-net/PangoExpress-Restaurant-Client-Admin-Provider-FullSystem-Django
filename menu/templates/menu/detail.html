@@ -13,4 +13,37 @@
         <a class="btn btn-default" href="/menu/ordenar/{{ plato.id }}">Ordenar</a>
     {% endif %}
     <a class="btn btn-default" href="/menu/">Volver</a>
+
+    <br/>
+    <br/>
+    <hr/>
+    <br/>
+
+    {% if usuario and usuario.es_cliente %}
+        <form action ="" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type = "submit" value = "Puntuar"/>
+        </form>
+    {% endif %}
+
+    <h4> Puntuaciones de otros usuarios </h4>
+
+    {% if puntuaciones %}
+        <table class="table table-hover">
+        {% for puntuacion in puntuaciones %}
+            <tr><td>
+                {% if puntuacion.puntuacion == 'pos' %}
+                    <h4>{{puntuacion.usuario.perfil.pseudonimo}} <span class="glyphicon glyphicon-thumbs-up"></span></h4>
+                {% else %}
+                    <h4>{{puntuacion.usuario.perfil.pseudonimo}} <span class="glyphicon glyphicon-thumbs-down"></span></h4>
+                {% endif %}
+                <p>{{puntuacion.comentario}}</p>
+            </td></tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <h4> Aun nadie ha puntuado este plato, sé el primero! </h4>
+    {% endif %}
+
 {% endblock %}
