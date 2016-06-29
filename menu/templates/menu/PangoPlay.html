@@ -1,0 +1,15 @@
+{% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% block main %}
+
+<h1>PangoPlay: centro de entretenimiento</h1>
+    <div class= "half halfPics fullScreen">
+        <a href="{% url 'menu:PangoInvaders' %}"><img src="{%static 'menu/images/PangoInvaders.png'%}"></a>
+    </div>
+    <div class= "half halfPics fullScreen">
+        <a href="{% url 'menu:PangoBros' %}"><img src="{%static 'menu/images/PangoBros.png'%}"></a>
+    </div>  
+
+{% endblock %}
+

@@ -1,0 +1,48 @@
+{% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
+    {% load staticfiles %}
+{% block main %}
+<head>
+                <meta charset = "utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <meta name="viewport" content="width=device-width, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+                <meta name="apple-mobile-web-app-capable" content="yes">
+                <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+          <title>Pango Invaders</title>
+          {% block stylesheets %}
+          <link rel = "stylesheet" type ="text/css" href="{% static 'menu/layout3.css' %}" />
+          <link href='http://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
+          <link rel="stylesheet" href="{%static 'menu/PangoInvaders/base.css'%}" type="text/css" />
+          {% endblock %}
+            {% block script %}
+
+            {% endblock %}
+
+</head>
+<h1 class="titulo"><span class="titulo2">Pango</span> Invaders</h1>
+<h2 class="pleasewhait">... En breves momentos su orden sera servida.</h2>
+
+  <div class="mensajePrincipal fullScreen">
+    <h1 class="titulo triangle"><span>Instrucciones</span></h1>
+    <p class="msj3">Ayuda al pequeño pangolin a terminar con todas las ¨naves¨ enemigas...</p>
+    <p class="msj1"> -Movimiento <span><img class="imagentecla1" src="{%static 'menu/PangoInvaders/images/desplazamiento.png'%}"></span></p>
+    <p class="msj2"> -Fuego<span><img class="imagentecla2" src="{%static 'menu/PangoInvaders/images/fuego.png'%}"></span></p>
+    </div>
+
+{%block body-tag%}
+
+<body>
+{% endblock %}
+
+  <div id='container'>
+    <canvas id='game' width='320' height='480'></canvas>
+                    <link type="text/javascript" src="{%static 'menu/PangoInvaders/engine.js'}">
+              <link type="text/javascript" src="{%static 'menu/PangoInvaders/game.js'}">
+  </div>
+
+</body>
+{% endblock %}
+
+
+

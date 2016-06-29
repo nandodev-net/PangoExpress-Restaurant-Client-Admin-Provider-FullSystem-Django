@@ -51,6 +51,15 @@ urlpatterns = [
     #/menu/verpedido
     url(r'^verpedido/$', views.ver_pedido, name = 'ver_pedido'),
 
+    #/menu/PangoPlay
+    url(r'^PangoPlay/$', views.PangoPlay, name = 'PangoPlay'),
+
+    #/menu/PangoInvaders
+    url(r'^PangoInvaders/$', views.PangoInvaders, name = 'PangoInvaders'),
+
+    #/menu/PangoBros
+    url(r'^PangoBros/$', views.PangoBros, name = 'PangoBros'),
+
     #/menu/verpedido/pagar
     url(r'^verpedido/pagar/(?P<cuenta_id>[0-9]+)$', views.pagar_cuenta, name = 'pagar_pedido'),
 

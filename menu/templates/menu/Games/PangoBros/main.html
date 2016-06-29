@@ -1,0 +1,104 @@
+{% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
+    {% load staticfiles %}
+    {% load static from staticfiles  %}
+
+{% block main %}
+	<head>
+		<title>Super Pango Bros</title>
+                <meta charset = "utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <meta name="viewport" content="width=device-width, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+                <meta name="apple-mobile-web-app-capable" content="yes">
+                <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+
+
+                       {% block stylesheets %}
+                        <link rel = "stylesheet" type ="text/css" href="{% static 'menu/layout3.css' %}" />
+                        <link rel="stylesheet" href="{%static 'menu/PangoBros/base.css'%}" type="text/css" />
+
+                        {% endblock %}
+
+
+	</head>
+
+                <h1 class="titulo"><span class="titulo2">Super Pango</span> Bros</h1>
+                <h2 class="pleasewhait">... En breves momentos su orden sera servida.</h2>
+                <div class="mensajePrincipal fullScreen">
+                        <h1 class="titulo triangle"><span>Instrucciones</span></h1>
+                        <p class="msj3">Ayuda a Pango Bros a rescatar al reino champiñon...</p>
+                        <p class="msj1"> -Movimiento <span><img class="imagentecla1" src="{%static 'menu/PangoBros/images/direction.png'%}"></span></p>
+                        <p class="msj2"> -Saltar<span><img class="imagentecla2" src="{%static 'menu/PangoBros/images/Skey.png'%}"></span></p>
+                        <p class="msj4"> -Fuego/correr<span><img class="imagentecla3" src="{%static 'menu/PangoBros/images/Akey.png'%}"></span></p>
+                </div>
+
+
+        {% block script %}
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script type='text/javascript' src='http://www.midijs.net/lib/midi.js'></script>
+        <!-- Enjine Includes -->
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/core.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/gameCanvas.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/keyboardInput.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/resources.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/drawable.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/state.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/gameTimer.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/camera.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/drawableManager.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/sprite.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/spriteFont.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/frameSprite.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/animatedSprite.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/collideable.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/Enjine/application.js'%}"></script>
+
+        <!-- Actual game code -->
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/setup.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/spriteCuts.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/level.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/backgroundGenerator.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/backgroundRenderer.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/improvedNoise.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/notchSprite.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/character.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/levelRenderer.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/levelGenerator.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/spriteTemplate.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/enemy.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/fireball.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/sparkle.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/coinAnim.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/mushroom.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/particle.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/fireFlower.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/bulletBill.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/flowerEnemy.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/shell.js'%}"></script>
+
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/titleState.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/loadingState.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/loseState.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/winState.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/mapState.js'%}"></script>
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/levelState.js'%}"></script>
+
+        <script type="text/javascript" src="{%static 'menu/PangoBros/code/music.js'%}"></script>
+
+        <script>$(document).ready(function() { new Enjine.Application().Initialize(new Mario.LoadingState(), 320, 240) });</script>
+        {% endblock %}
+
+
+
+{%block body-tag%}
+
+	<body onload="Load()">
+        {% endblock %}
+
+		<canvas id="canvas" width="640" height="480">
+			<p>Your browser does not support the canvas element.</p>
+		</canvas>
+
+	</body>
+{% endblock %}

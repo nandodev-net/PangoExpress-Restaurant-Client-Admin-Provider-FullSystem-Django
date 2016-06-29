@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+                <meta charset="UTF-8"/>
+		<title>Super Pango Bros</title>
+                <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+                <link rel="stylesheet" href="base.css" type="text/css" />
+        	<script type='text/javascript' src='http://www.midijs.net/lib/midi.js'></script>
+                <meta name="viewport" content="width=device-width, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+                <meta name="apple-mobile-web-app-capable" content="yes">
+                <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	</head>
+
+        <h1 class="titulo"><span class="titulo2">Super Pango</span> Bros</h1>
+        <h2 class="pleasewhait">... En breves momentos su orden sera servida.</h2>
+        <div class="mensajePrincipal fullScreen">
+                <h1 class="titulo triangle"><span>Instrucciones</span></h1>
+                <p class="msj3">Ayuda a Pango Bros a rescatar al reino champiñon...</p>
+                <p class="msj1"> -Movimiento <span><img class="imagentecla1" src="images/direction.png"></span></p>
+                <p class="msj2"> -Saltar<span><img class="imagentecla2" src="images/Skey.png"></span></p>
+                <p class="msj4"> -Fuego/correr<span><img class="imagentecla3" src="images/Akey.png"></span></p>
+        </div>
+
+	<body>
+		<canvas id="canvas" width="640" height="480">
+			<p>Your browser does not support the canvas element.</p>
+		</canvas>
+
+        <!-- Enjine Includes -->
+        <script src="Enjine/core.js"></script>
+        <script src="Enjine/gameCanvas.js"></script>
+        <script src="Enjine/keyboardInput.js"></script>
+        <script src="Enjine/resources.js"></script>
+        <script src="Enjine/drawable.js"></script>
+        <script src="Enjine/state.js"></script>
+        <script src="Enjine/gameTimer.js"></script>
+        <script src="Enjine/camera.js"></script>
+        <script src="Enjine/drawableManager.js"></script>
+        <script src="Enjine/sprite.js"></script>
+        <script src="Enjine/spriteFont.js"></script>
+        <script src="Enjine/frameSprite.js"></script>
+        <script src="Enjine/animatedSprite.js"></script>
+        <script src="Enjine/collideable.js"></script>
+        <script src="Enjine/application.js"></script>
+
+        <!-- Actual game code -->
+        <script src="code/setup.js"></script>
+        <script src="code/spriteCuts.js"></script>
+        <script src="code/level.js"></script>
+        <script src="code/backgroundGenerator.js"></script>
+        <script src="code/backgroundRenderer.js"></script>
+        <script src="code/improvedNoise.js"></script>
+        <script src="code/notchSprite.js"></script>
+        <script src="code/character.js"></script>
+        <script src="code/levelRenderer.js"></script>
+        <script src="code/levelGenerator.js"></script>
+        <script src="code/spriteTemplate.js"></script>
+        <script src="code/enemy.js"></script>
+        <script src="code/fireball.js"></script>
+        <script src="code/sparkle.js"></script>
+        <script src="code/coinAnim.js"></script>
+        <script src="code/mushroom.js"></script>
+	<script src="code/particle.js"></script>
+	<script src="code/fireFlower.js"></script>
+        <script src="code/bulletBill.js"></script>
+        <script src="code/flowerEnemy.js"></script>
+        <script src="code/shell.js"></script>
+
+        <script src="code/titleState.js"></script>
+        <script src="code/loadingState.js"></script>
+        <script src="code/loseState.js"></script>
+        <script src="code/winState.js"></script>
+        <script src="code/mapState.js"></script>
+        <script src="code/levelState.js"></script>
+
+        <script src="code/music.js"></script>
+
+        <script>$(document).ready(function() { new Enjine.Application().Initialize(new Mario.LoadingState(), 320, 240) });</script>
+	</body>
+</html>

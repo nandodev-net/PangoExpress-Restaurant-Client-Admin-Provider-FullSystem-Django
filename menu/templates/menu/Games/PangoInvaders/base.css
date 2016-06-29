@@ -1,0 +1,184 @@
+@font-face {
+  font-family: "NIAGENG";
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/NIAGENG.eot");
+  src: url("fonts/NIAGENG.otf"), url("fonts/NIAGENG.ttf"); }
+
+@font-face {
+  font-family: "PRISTINA";
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/PRISTINA.eot");
+  src: url("fonts/PRISTINA.otf"), url("fonts/PRISTINA.ttf"); }
+
+.titulo{
+	margin-top: 3%;
+	font-family: PRISTINA;
+	font-size: 7em;
+	z-index: -1;
+	position: fixed;
+}
+.titulo2{
+	font-family: NIAGENG;
+}
+
+.pleasewhait{
+  font-size: 1.5em;
+}
+
+.mensajePrincipal{
+  z-index: -1;
+  position: fixed;
+}
+  .mensajePrincipal h1 {
+    color: #ededed;
+    font-size: 4em;
+    text-shadow: 5px 5px 7px #000; 
+    margin-top: 23%;
+    margin-left: 5%;
+
+    }
+
+
+  .mensajePrincipal p {
+    margin-top: 14%;
+    margin-left: 56%;
+    color: #ededed;
+    font-size: 1.8em;
+    text-shadow: 5px 5px 7px #000;
+    font-weight: bolder;
+    width: 30%;
+    text-align: justify;
+    position: fixed;
+
+     }
+
+      .mensajePrincipal .msj1  {
+    margin-top: 9%;
+    margin-left: 56%;
+    color: #ededed;
+    font-size: 1.8em;
+    text-shadow: 5px 5px 7px #000;
+    font-weight: bolder;
+    width: 30%;
+    text-align: justify;
+    position: fixed;
+
+     }
+          .mensajePrincipal .msj2  {
+    margin-top: 25%;
+    margin-left: 56%;
+    color: #ededed;
+    font-size: 1.8em;
+    text-shadow: 5px 5px 7px #000;
+    font-weight: bolder;
+    width: 30%;
+    text-align: justify;
+    position: fixed;
+
+     }
+               .mensajePrincipal .msj3  {
+    margin-top: 9%;
+    margin-left: 56%;
+    color: #ededed;
+    font-size: 1.8em;
+    text-shadow: 5px 5px 7px #000;
+    font-weight: bolder;
+    width: 30%;
+    text-align: justify;
+    position: fixed;
+
+     }
+
+
+
+.mensajePrincipal .triangle {
+width: 90%;
+height: 0;
+margin-left: 54%;
+margin-top: 1%;
+border-top: 100px solid rgba(0,0,0,0.7);
+border-left: 190px solid rgba(0,0,0,0.7);
+border-bottom: 8em solid rgba(0,0,0,0.7); }
+
+.mensajePrincipal .triangle span {
+line-height: 2em;
+display: block;
+width: 130px;
+top: -2em;
+left: -180px;
+position: relative; }
+
+.imagentecla1{
+  width: 7em;
+  padding-top: 10%;
+  margin-top: 2em;
+
+  }    
+.imagentecla2 {
+  width: 7em;
+  z-index: -1;
+}
+
+
+ body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin-left: 4%;
+	margin-top: 2%;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	background: #d3d3d3 url('pan.jpg');
+    top right no-repeat; background-attachment:fixed;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/* Center the container */
+#container {
+  padding-top:50px;
+  margin:0 auto;
+  width:480px;
+}
+
+/* Give canvas a background */
+canvas {
+  background-color:black;
+
+}

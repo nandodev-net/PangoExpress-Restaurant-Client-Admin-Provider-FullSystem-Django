@@ -907,6 +907,15 @@ def ver_pedidoprove(request, id_pedido):
         print('Sapo no te metas con mi sistema')
         return redirect('/menu/')
 
+def PangoPlay(request):
+        return render(request, 'menu/PangoPlay.html')
+
+def PangoInvaders(request):
+        return render(request, 'menu/Games/PangoInvaders/index.html')
+
+def PangoBros(request):
+        return render(request, 'menu/Games/PangoBros/main.html')
+        
 def enviar_pedido(request, id_pedido):
     pedido = PEDIDOPROVEEDOR.objects.get(id=id_pedido)
 

@@ -41,6 +41,8 @@
             <ul class = "nav navbar-nav">
                 {# Ver Menu #}
                 <li> <a href = "{% url 'menu:menu' %}"> Menu </a></li>
+                {#Centro de Juegos#}
+                <li> <a href = "{% url 'menu:PangoPlay' %}">PangoPlay</a></li>
                 {# Usuarios logeados #}
                 {% if request.session.logged %}
                     {# Ver Pedido #}
