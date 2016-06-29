@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
-from .models import PERFIL, USUARIO, CLIENTE, PROVEEDOR, BILLETERA, PRODUCTO, Ofrece
+from .models import PERFIL, USUARIO, CLIENTE, PROVEEDOR, BILLETERA, PRODUCTO, Ofrece, Puntuacion
 
 #Validadores
 #Validar nombre válido.
@@ -165,7 +165,7 @@ class FormRegistrarUsuario2(forms.ModelForm):
             'contrasenia': forms.widgets.PasswordInput,
         }
 
-        
+
 
 class FormRegistrarCliente(forms.ModelForm):
     class Meta:
@@ -265,6 +265,15 @@ class FormSeleccionarProductos(forms.ModelForm):
 
 class FormModificarProductoProveedor(forms.ModelForm):
 
-	class Meta:
-		model = Ofrece
-		fields = ['precio']
+    class Meta:
+        model = Ofrece
+        fields = ['precio']
+
+class FormPuntuarPlato(forms.Form):
+    puntuacion = forms.ChoiceField(required = True,
+                                   widget = forms.RadioSelect,
+                                   choices = [('pos', 'Positiva'), ('neg', 'Negativa')]
+                                   )
+    comentario = forms.CharField(max_length=300, required = False)
+
+

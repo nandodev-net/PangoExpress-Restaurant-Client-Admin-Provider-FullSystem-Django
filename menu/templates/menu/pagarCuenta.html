@@ -11,9 +11,9 @@
         <form action = "" method = "post">
             {% csrf_token %}
                 <p>{% bootstrap_label "PIN" %}
-                <span style="color:red">*<span>
+                <span style="color:red">*</span>
                 {% bootstrap_field form.PIN  show_label=False %}
-                </p> 
+                </p>
             <input type = "submit" value = "Confirmar"/>
         </form>
     {% else %}

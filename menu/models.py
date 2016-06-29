@@ -259,6 +259,7 @@ class PLATO(models.Model):
     precio = models.FloatField()
     path_img = models.FileField()
     descripcion = models.CharField(max_length = 500)
+    rating = models.IntegerField(default = 0)
 
     class Meta:
         unique_together = ('establecimiento', 'nombre')
@@ -348,4 +349,10 @@ class ProductoEnPedido(models.Model):
 
     def get_subtotal(self):
         return self.producto.precio * self.cantidad
+
+class Puntuacion(models.Model):
+    plato = models.ForeignKey(PLATO)
+    usuario = models.ForeignKey(USUARIO)
+    puntuacion = models.CharField(max_length=5)
+    comentario = models.CharField(max_length = 300, default = '')
 
