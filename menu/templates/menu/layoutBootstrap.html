@@ -47,6 +47,11 @@
                     <li> <a href = "{% url 'menu:ver_pedido' %}"> Pedido </a></li>
                     {# Ver Perfil #}
                     <li> <a href = "{% url 'menu:perfil' %}"> Perfil </a></li>
+
+                    {% if request.session.es_prove %}
+                        {# Ver Perfil #}
+                        <li> <a href = "{% url 'menu:notificaciones' %}"> Notificaciones </a></li>
+                    {% endif %}
                 {% endif %}
             </ul>
 

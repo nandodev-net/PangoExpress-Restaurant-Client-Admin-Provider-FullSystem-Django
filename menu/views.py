@@ -341,6 +341,7 @@ class IniciarSesion(View):
                     perfil.save()
                     request.session['logged'] = True
                     request.session['pid'] = perfil.id
+                    request.session['es_prove'] = False
                     return redirect('/menu/')
 
                 except PERFIL.DoesNotExist:
@@ -353,6 +354,13 @@ class IniciarSesion(View):
                     if(usuario.contrasenia == form.cleaned_data['passwd']):
                         request.session['logged'] = True
                         request.session['pid'] = perfil.id
+
+                        try:
+                            prove = PROVEEDOR.objects.get(usuario = usuario)
+                            request.session['es_prove'] = True
+                        except PROVEEDOR.DoesNotExist:
+                            request.session['es_prove'] = False
+
                         return redirect('/menu/')
 
                     else:
@@ -773,6 +781,7 @@ class HacerPedidos(View):
             # siempre sera la misma cantidad (porque es el mismo inventario)
             relaciones = Ofrece.objects.filter(proveedor = proveedor)
             formSetProductos = formProductos(queryset = relaciones)
+            request.session['id_prove'] = proveedor.usuario.perfil.id
 
         if(formSetProductos.is_valid()):
             productosAComprar = {}
@@ -786,6 +795,7 @@ class HacerPedidos(View):
             context = {'productosAComprar' : productosAComprar,
                        'total' : total
                        }
+            request.session['productos_pedido'] = productosAComprar
 
             return render(request, 'menu/confirmarPedido.html', context)
 
@@ -797,7 +807,9 @@ class HacerPedidos(View):
 
 
 def hacer_compra(request, monto):
+
     monto = monto.replace(',', '.')
+    '''
     trans = TRANSACCION(establecimiento = None,
                         billetera = None,
                         tipo = 'Pedido',
@@ -805,9 +817,83 @@ def hacer_compra(request, monto):
                         fecha = datetime.datetime.now()
                         )
     trans.save()
+    '''
+    perfil = PERFIL.objects.get(id=request.session['id_prove'])
+    usuario = USUARIO.objects.get(perfil=perfil)
+    proveedor = PROVEEDOR.objects.get(usuario=usuario)
+
+    pedido = PEDIDOPROVEEDOR(proveedor = proveedor,
+                             total = monto
+                             )
+    pedido.save()
+
+    for producto, data in request.session['productos_pedido'].items():
+        prod = PRODUCTO.objects.get(nombre = producto)
+        ofrece = Ofrece.objects.get(producto = prod,
+                                    proveedor = proveedor
+                                    )
+        aux = ProductoEnPedido(producto = ofrece,
+                               pedido = pedido,
+                               cantidad = data[0]
+                               )
+        aux.save()
+
+    request.session['productos_pedido'] = None
+    request.session['id_prove'] = None
 
     return redirect('/menu/perfil/')
 
+
+def mostrar_notificaciones(request):
+    if (request.session['es_prove']):
+        perfil = PERFIL.objects.get(id=request.session['pid'])
+        usuario = USUARIO.objects.get(perfil=perfil)
+        proveedor = PROVEEDOR.objects.get(usuario=usuario)
+
+        pedidos = PEDIDOPROVEEDOR.objects.filter(proveedor = proveedor,
+                                                 atendido = False
+                                                 )
+
+        return render(request, 'menu/verNotificaciones.html', {'pedidos':pedidos})
+
+    else:
+        print('Sapo no te metas con mi sistema')
+        return redirect('/menu/')
+
+def ver_pedidoprove(request, id_pedido):
+    if (request.session['es_prove']):
+        pedido = PEDIDOPROVEEDOR.objects.get(id = id_pedido)
+
+        productos = ProductoEnPedido.objects.filter(pedido = pedido)
+        total = 0
+        for producto in productos:
+            total += producto.get_subtotal()
+
+        context = {'productos':productos,
+                   'total':total,
+                   'pedido' : pedido
+                   }
+
+        return render(request, 'menu/verPedidoProve.html', context)
+    else:
+        print('Sapo no te metas con mi sistema')
+        return redirect('/menu/')
+
+def enviar_pedido(request, id_pedido):
+    pedido = PEDIDOPROVEEDOR.objects.get(id=id_pedido)
+
+    trans = TRANSACCION(establecimiento=None,
+                        billetera=None,
+                        tipo='Pedido',
+                        monto=pedido.total,
+                        fecha=datetime.datetime.now()
+                        )
+    trans.save()
+
+    pedido.atendido = True
+    pedido.save()
+
+    return redirect('/menu/notificaciones/')
 
 ''' Dummy para hacer pruebas con el layout '''
 def layout_bootstrap(request):

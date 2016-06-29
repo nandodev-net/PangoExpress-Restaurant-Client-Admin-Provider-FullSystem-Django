@@ -1,0 +1,16 @@
+{% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
+
+{% block main %}
+    <h3> Notificaciones </h3>
+    <br/>
+    {% if pedidos %}
+        {% for pedido in pedidos %}
+            <h4> Pedido de PangoExpress
+            <a class="btn btn-default" href = "/ver_pedidoprove/{{ pedido.id }}">Revisar</a></h4>
+        {% endfor %}
+    {% else %}
+        <h4> No hay notificaciones que mostrar </h4>
+    {% endif %}
+
+{% endblock %}
