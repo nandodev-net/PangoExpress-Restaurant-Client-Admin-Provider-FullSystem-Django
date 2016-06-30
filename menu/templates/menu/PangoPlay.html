@@ -2,6 +2,10 @@
 {% load bootstrap3 %}
 {% load staticfiles %}
 {% block main %}
+    {% block stylesheets %}
+        <link rel = "stylesheet" type ="text/css" href="{% static 'menu/layout.css' %}" />
+        <link rel = "stylesheet" type ="text/css" href="{% static 'menu/stilo.css' %}" />
+    {% endblock %}
 
 <h1>PangoPlay: centro de entretenimiento</h1>
     <div class= "half halfPics fullScreen">

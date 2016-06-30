@@ -1,0 +1,25 @@
+.fullScreen {
+  height: 80%;
+  width: 80%;
+  margin: 0;
+  padding: 0; }
+
+.half {
+  display: inline-block;
+  margin-right: -4px;
+  width: 50%;
+  vertical-align: top; }
+
+.halfPics {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 0; }
+  .halfPics img {
+    -webkit-filter: grayscale(1) blur(2px);
+    filter:grayscale(1) blur(2px);
+    transition: all 0.4s;
+    width: 100%; }
+    .halfPics img:hover {
+      filter: grayscale(0.2) blur(0px);
+      -webkit-filter: grayscale(0.2) blur(0px); }
