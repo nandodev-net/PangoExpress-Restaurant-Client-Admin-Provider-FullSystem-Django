@@ -401,7 +401,11 @@ class IniciarSesion(View):
                     print('El perfil no existe')
                     request.session['logged'] = False
                     request.session['pid'] = -1
-                    return redirect('/menu/iniciarsesion')
+                    # Envia el mensaje de error, bajo la forma de error_message
+                    return render(request, 'menu/iniciarSesion.html', {'form' : form, 
+                        'error_message': "El pseudónimo o la clave no son correctos, vuelva a intentar"
+                        })
+                    #return redirect('/menu/iniciarsesion')
 
         else:
             print('Error en formulario\n')

@@ -13,6 +13,11 @@
 		<span style="color:red">*<span>
 		{% bootstrap_field form.passwd  show_label=False %}
 	</p>
+	<!-- Si existe un error, se coloca aquí el mensaje --> 
+	{% if error_message %}
+	{% bootstrap_alert error_message alert_type='danger' dismissable=False %}
+	{% endif %}
     <input type = "submit" value = "Iniciar Sesion"/>
 </form>
 {% endblock %}
+
