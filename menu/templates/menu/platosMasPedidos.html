@@ -1,0 +1,22 @@
+{% extends 'menu/layoutBootstrap.html' %}
+{% load bootstrap3 %}
+
+{% block main %}
+    <h3> Platos mas Pedidos </h3>
+    <br/>
+    <br/>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="col-md-2">Plato</th><th class="col-md-1">Veces que se ha pedido</th>
+            </tr>
+        </thead>
+        {% for plato, cantidad in platos_mas_pedidos %}
+             <tr>
+                 <td class="col-md-2">{{plato}}</td><td class="col-md-1">{{cantidad}}</td>
+             </tr>
+        {% endfor %}
+    </table>
+
+    {% bootstrap_button "Volver" button_class="btn btn-default" href='/perfil' %}
+{% endblock %}

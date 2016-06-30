@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 
 from django.forms import modelformset_factory
+import operator
 
 
 def index(request):
@@ -33,6 +34,10 @@ def menu(request):
             WHERE i3.producto_id = i4.producto_id \
                 AND i3.plato_id = p1.id \
                 AND i3.cantidad > i4.cantidad' 
+                                           )
+    platos_disponibles = PLATO.objects.raw('SELECT DISTINCT(p.nombre), p.id  \
+        FROM menu_Plato as p, menu_Ingredientes as i,  menu_Inventario as i2 \
+        WHERE  i.producto_id = i2.producto_id AND i.cantidad <= i2.cantidad AND i.plato_id = p.id '
                                            )
     platos_disponibles_nombres = []
     for plato in platos_disponibles:
@@ -942,6 +947,29 @@ def enviar_pedido(request, id_pedido):
     pedido.save()
 
     return redirect('/menu/notificaciones/')
+
+def ver_platos_mas_pedidos(request):
+    pedidos = PedidoEnCuenta.objects.all()
+    platos = {}
+    for pedido in pedidos:
+        if(platos.get(pedido.plato.nombre, None) == None):
+            platos[pedido.plato.nombre] = pedido.cantidad
+        else:
+            platos[pedido.plato.nombre] += pedido.cantidad
+
+    aux = sorted(platos.items(), key=operator.itemgetter(1))
+    platos_mas_pedidos = []
+    for i in reversed(aux):
+        platos_mas_pedidos.append(i)
+
+    if(len(platos_mas_pedidos) > 5):
+        platos_mas_pedidos = platos_mas_pedidos[0:5]
+
+    print(platos_mas_pedidos)
+    context = {'platos_mas_pedidos' : platos_mas_pedidos,
+               }
+
+    return render(request, 'menu/platosMasPedidos.html', context)
 
 ''' Dummy para hacer pruebas con el layout '''
 def layout_bootstrap(request):

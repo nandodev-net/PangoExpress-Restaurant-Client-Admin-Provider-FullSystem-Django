@@ -75,6 +75,9 @@ urlpatterns = [
     #/menu/transacciones_rest/
 	url(r'^transacciones_rest/$', views.ver_transacciones_restaurant, name = 'transacciones_restaurant'),
 
+    # /menu/platos_mas_pedidos/
+    url(r'^platos_mas_pedidos/$', views.ver_platos_mas_pedidos, name='platos_mas_pedidos'),
+
     #/menu/hacer_pedidos/
 	url(r'^hacer_pedidos/$', views.HacerPedidos.as_view(), name = 'hacer_pedidos'),
 
