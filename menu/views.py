@@ -24,8 +24,15 @@ def menu(request):
     relaciones = []
     vergas = {}
     platos_disponibles = PLATO.objects.raw('SELECT DISTINCT(p.nombre), p.id  \
-                                            FROM menu_Plato as p, menu_Ingredientes as i,  menu_Inventario as i2 \
-                                            WHERE  i.producto_id = i2.producto_id AND i.cantidad <= i2.cantidad AND i.plato_id = p.id '
+        FROM menu_Plato as p, menu_Ingredientes as i,  menu_Inventario as i2 \
+        WHERE  i.producto_id = i2.producto_id \
+            AND i.plato_id = p.id \
+        EXCEPT\
+            SELECT DISTINCT(p1.nombre), p1.id\
+            FROM menu_Plato as p1, menu_Ingredientes as i3, menu_Inventario as i4\
+            WHERE i3.producto_id = i4.producto_id \
+                AND i3.plato_id = p1.id \
+                AND i3.cantidad > i4.cantidad' 
                                            )
     platos_disponibles_nombres = []
     for plato in platos_disponibles:
