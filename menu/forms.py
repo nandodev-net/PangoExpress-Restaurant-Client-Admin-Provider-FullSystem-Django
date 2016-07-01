@@ -199,17 +199,17 @@ class FormRegistrarProveedor(forms.ModelForm):
 
 
 class FormEditarPerfilCliente(forms.Form):
-    pseudonimo = forms.CharField(label='Pseudonimo', validators =[validate_pseudonimo])
+    pseudonimo = forms.CharField(label='Pseudónimo', validators =[validate_pseudonimo])
     nombre = forms.CharField(label='Nombre')
     apellido = forms.CharField(label='Apellido')
-    telefono = forms.CharField(label='Telefono', validators = [validate_telefono])
+    telefono = forms.CharField(label='Teléfono', validators = [validate_telefono])
 
     nombre.widget = forms.widgets.TextInput(attrs={'readonly': 'readonly'})
     apellido.widget = forms.widgets.TextInput(attrs={'readonly': 'readonly'})
 
 
 class FormEditarPerfilProveedor(forms.Form):
-    pseudonimo = forms.CharField(label='Pseudonimo', validators = [validate_pseudonimo])
+    pseudonimo = forms.CharField(label='Pseudónimo', validators = [validate_pseudonimo])
     rif = forms.CharField(label='RIF', validators = [validate_rif])
     nombre = forms.CharField(label='Nombre')
 

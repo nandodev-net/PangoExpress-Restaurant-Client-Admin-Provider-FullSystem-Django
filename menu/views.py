@@ -276,7 +276,8 @@ class EditarPerfil(View):
             data = {'pseudonimo' : perfil.pseudonimo,
                     'nombre' : cliente.nombre,
                     'apellido': cliente.apellido,
-                    'telefono': cliente.telefono
+                    'telefono': cliente.telefono,
+                    'es_cliente': usuario.es_cliente
                     }
 
             form = FormEditarPerfilCliente(data)
@@ -404,7 +405,10 @@ class IniciarSesion(View):
                         print('No coinciden perrito')
                         request.session['logged'] = False
                         request.session['pid'] = -1
-                        return redirect('/menu/iniciarsesion')
+                        #return redirect('/menu/iniciarsesion')
+                        return render(request, 'menu/iniciarSesion.html', {'form' : form, 
+                        'error_message': "El pseudónimo o la clave no son correctos, vuelva a intentar"
+                        })
 
                 except PERFIL.DoesNotExist:
                     print('El perfil no existe')
