@@ -11,14 +11,14 @@
 
 {% block main %}
 {% if logged %}
-    <p> Pseudonimo: {{ pseudonimo }}</p>
+    <p> Pseudónimo: {{ pseudonimo }}</p>
     <p> e-mail: {{ email }}</p>
     <p> Nombre: {{ nombre }}</p>
 
     {% if es_cliente %}
         <p> Apellido: {{ apellido }}</p>
         <p> CI: {{ ci }}</p>
-        <p> Telefono: {{ telefono }}</p>
+        <p> Teléfono: {{ telefono }}</p>
 
     {% else %}
         <p> RIF: {{ rif }}</p>
@@ -36,12 +36,12 @@
 
     {% if is_staff %}
         {% bootstrap_button "Transacciones" button_class="btn btn-default" href='/menu/transacciones_rest' %}
-        {% bootstrap_button "Interfaz Admininistracion" button_class="btn btn-default" href='/admin' %}
+        {% bootstrap_button "Interfaz de Admininistración" button_class="btn btn-default" href='/admin' %}
         {% bootstrap_button "Hacer Pedidos" button_class="btn btn-default" href='/menu/hacer_pedidos' %}
         {% bootstrap_button "Platos más Pedidos" button_class="btn btn-default" href='/menu/platos_mas_pedidos' %}
     {% endif %}
 
 {% else %}
-    <p> Usted no ha iniciado sesion </p>
+    <p> Usted no ha iniciado sesión </p>
 {% endif %}
 {% endblock %}
