@@ -35,10 +35,7 @@ def menu(request):
                 AND i3.plato_id = p1.id \
                 AND i3.cantidad > i4.cantidad' 
                                            )
-    platos_disponibles = PLATO.objects.raw('SELECT DISTINCT(p.nombre), p.id  \
-        FROM menu_Plato as p, menu_Ingredientes as i,  menu_Inventario as i2 \
-        WHERE  i.producto_id = i2.producto_id AND i.cantidad <= i2.cantidad AND i.plato_id = p.id '
-                                           )
+   
     platos_disponibles_nombres = []
     for plato in platos_disponibles:
         #print (plato.nombre)
@@ -755,7 +752,8 @@ class Modificar_Producto_Inventario(View):
             ofrece.save()
 
         else:
-            print('Formulario invalido')
+            print('Precio Inválido')
+            return render(request, 'menu/modificarInventario.html', {'form': form, 'ofrece': ofrece})
 
         return redirect('/menu/perfil/inventario/')
 

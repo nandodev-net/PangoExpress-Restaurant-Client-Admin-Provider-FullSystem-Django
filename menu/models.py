@@ -164,6 +164,13 @@ def validate_monto(monto):
             params={'monto': monto},
             )
 
+def validate_precio(monto):
+    if monto<=0:
+        raise ValidationError(
+            _('%(monto)s Precio inválido, debe ser un precio positivo.'),
+            params={'monto': monto},
+            )
+
 # Create your models here.
 class PERFIL(models.Model):
     id = models.AutoField(primary_key=True)
@@ -256,7 +263,7 @@ class PLATO(models.Model):
     id = models.AutoField(primary_key=True)
     establecimiento = models.ForeignKey(RESTAURANT, null = True)
     nombre = models.CharField(max_length=50)
-    precio = models.FloatField()
+    precio = models.FloatField(validators=[validate_precio])
     path_img = models.FileField()
     descripcion = models.CharField(max_length = 500)
     rating = models.IntegerField(default = 0)
@@ -283,7 +290,7 @@ class Pedido(models.Model):
     establecimiento = models.ForeignKey(RESTAURANT)
     producto = models.ForeignKey(PRODUCTO)
     email = models.ForeignKey(PROVEEDOR)
-    precio = models.FloatField()
+    precio = models.FloatField(validators=[validate_precio])
     cantidad = models.IntegerField()
     class Meta:
         unique_together = ('establecimiento', 'producto', 'email')
@@ -292,7 +299,7 @@ class Pedido(models.Model):
 class Ofrece(models.Model):
     proveedor = models.ForeignKey(PROVEEDOR)
     producto = models.ForeignKey(PRODUCTO)
-    precio = models.FloatField()
+    precio = models.FloatField(validators=[validate_precio])
     class Meta:
         unique_together = ('proveedor', 'producto')
 
