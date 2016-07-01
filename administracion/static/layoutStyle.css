@@ -1,0 +1,45 @@
+body{
+    background: #d3d3d3 url('images/pan2.jpg');
+    top right no-repeat; background-attachment:fixed;
+    /*padding: 10px;*/
+}
+
+body h2{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-family: NIAGENG;
+	/*width: 50%;*/
+	/*font-family: PRISTINA;*/
+	}
+
+section#main {
+	width: 60%;
+	text-align: center;
+	margin: auto;
+	padding: 3%;
+}
+
+img {
+	width: 45px;
+	}
+	
+header{
+	background: #FB9209;
+	padding: 10px;
+	border-radius: 5px;
+	}
+	
+header a#volver {
+	/*float:right;*/
+	
+	}
+	
+header a:hover, header a {
+	text-decoration: none;
+	color: #f5dd5d;
+	}
+	
+ul li {
+	list-style: none;
+	padding: 10px;
+}

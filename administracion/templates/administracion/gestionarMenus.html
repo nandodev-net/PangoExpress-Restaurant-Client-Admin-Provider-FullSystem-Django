@@ -1,0 +1,32 @@
+{% extends 'administracion/adminLayout.html' %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block main %}
+    <h3> Gestionar Menus </h3>
+    <br/>
+    <a class="btn btn-default" href="{% url 'administracion:agregar_menu' %}">Agregar Menu</a>
+    <a class="btn btn-default" href="{% url 'administracion:index' %}">Volver</a>
+    <br/>
+    <br/>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="col-md-2"> Menu </th>
+                <th class="col-md-1"> Eliminar </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for menu in menus %}
+                <tr>
+                    <td><a class="col-md-2"><a href="{% url 'administracion:editar_menu' menu.id %}">{{menu.nombre}}</a></td>
+                    <td class="col-md-1"><a href="{% url 'administracion:eliminar_menu' menu.id %}"
+                                            onclick="return confirm('Confirmar accion')" >
+                                            <img src="{% static 'images/trash.png' %}">
+                                        </a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

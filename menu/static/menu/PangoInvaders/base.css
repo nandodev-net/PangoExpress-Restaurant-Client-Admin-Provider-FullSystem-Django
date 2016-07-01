@@ -157,5 +157,6 @@ table {
 /* Give canvas a background */
 canvas {
   background-color:black;
+margin-left:15%;
 
 }

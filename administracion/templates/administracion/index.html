@@ -1,0 +1,11 @@
+{% extends 'administracion/adminLayout.html' %}
+{% load bootstrap3 %}
+
+{% block main %}
+    <ul>
+        <li><a class="btn btn-default" href="{% url 'administracion:gestionar_platos' %}">Gestionar Platos</a></li>
+        <li><a class="btn btn-default" href="{% url 'administracion:gestionar_productos' %}">Gestionar Productos</a></li>
+        <li><a class="btn btn-default" href="{% url 'administracion:gestionar_menus' %}">Gestionar Menus</a></li>
+        <li><a class="btn btn-default" href="{% url 'administracion:ver_inventario' %}">Inventario</a></li>
+    </ul>
+{% endblock %}

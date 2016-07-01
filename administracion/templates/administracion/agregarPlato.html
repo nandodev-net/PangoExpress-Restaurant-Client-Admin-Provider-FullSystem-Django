@@ -1,0 +1,12 @@
+{% extends 'administracion/adminLayout.html' %}
+{% load bootstrap3 %}
+
+{% block main %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type = "submit" value = "Continuar"/>
+    </form>
+
+    {% bootstrap_button "Volver" button_class="btn btn-default" href='/administracion' %}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'administracion/adminLayout.html' %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block main %}
+    <h3> Editar {{plato.nombre}} </h3>
+    <br/>
+    <a class="btn btn-default" href="{% url 'administracion:gestionar_platos' %}">Volver</a>
+    <br/>
+    <br/>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type = "submit" value = "Guardar Cambios"/>
+    </form>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="col-md-2"> Ingrediente </th>
+                <th class="col-md-1"> Cantidad </th>
+                <th class="col-md-1"> Eliminar </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for ingrediente in ingredientes %}
+                <tr>
+                    <td class="col-md-2">{{ingrediente.producto.nombre}}</td>
+                    <td class="col-md-1">{{ingrediente.cantidad}}</td>
+                    <td class="col-md-1"><a href="{% url 'administracion:eliminar_ingrediente' ingrediente.id %}"
+                                            onclick="return confirm('Confirmar accion')">
+                                            <img src="{% static 'images/trash.png' %}">
+                                         </a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form method="post" action="{% url 'administracion:agregar_ingrediente2' plato.id %}">
+        {% csrf_token %}
+        {% bootstrap_form form2 %}
+        <input type = "submit" value = "Agregar"/>
+    </form>
+{% endblock %}

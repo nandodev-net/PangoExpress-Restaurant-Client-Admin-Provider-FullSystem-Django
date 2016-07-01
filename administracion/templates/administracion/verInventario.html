@@ -1,0 +1,25 @@
+{% extends 'administracion/adminLayout.html' %}
+{% load bootstrap3 %}
+
+{% block main %}
+	<h3> Inventario </h3>
+	<br/>
+	{% bootstrap_button "Volver" button_class="btn btn-default" href='/administracion' %}
+	<br/>
+	<table class="table table-hover">
+		<thead>
+            <tr>
+                <th class="col-md-2"> Producto </th>
+                <th class="col-md-1"> Cantidad Disponible </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for producto in productos_disponibles %}
+                <tr>
+                    <td class="col-md-2">{{producto.producto.nombre}}</td>
+                    <td class="col-md-1">{{producto.cantidad}}</td>
+                </tr>
+            {% endfor %}
+	</table>
+{% endblock %}
