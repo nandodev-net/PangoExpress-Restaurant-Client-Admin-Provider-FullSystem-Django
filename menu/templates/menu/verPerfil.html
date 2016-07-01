@@ -36,7 +36,8 @@
 
     {% if is_staff %}
         {% bootstrap_button "Transacciones" button_class="btn btn-default" href='/menu/transacciones_rest' %}
-        {% bootstrap_button "Interfaz Admininistracion" button_class="btn btn-default" href='/admin' %}
+        <!--{% bootstrap_button "Interfaz Admininistracion" button_class="btn btn-default" href='/admin' %}-->
+        {% bootstrap_button "Interfaz Admininistracion" button_class="btn btn-default" href='/administracion' %}
         {% bootstrap_button "Hacer Pedidos" button_class="btn btn-default" href='/menu/hacer_pedidos' %}
         {% bootstrap_button "Platos mas Pedidos" button_class="btn btn-default" href='/menu/platos_mas_pedidos' %}
     {% endif %}

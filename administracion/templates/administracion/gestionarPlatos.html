@@ -1,0 +1,34 @@
+{% extends 'administracion/adminLayout.html' %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block main %}
+    <h3> Gestionar Platos </h3>
+    <br/>
+    <a class="btn btn-default" href="{% url 'administracion:agregar_plato' %}">Agregar Plato</a>
+    <a class="btn btn-default" href="{% url 'administracion:index' %}">Volver</a>
+    <br/>
+    <br/>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="col-md-2"> Plato </th>
+                <th class="col-md-1"> Precio </th>
+                <th class="col-md-1"> Eliminar </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for plato in platos %}
+                <tr>
+                    <td class="col-md-2"><a href="{% url 'administracion:editar_plato' plato.id %}">{{plato.nombre}}</a></td>
+                    <td class="col-md-1">{{plato.precio}}</td>
+                    <td class="col-md-1"><a href="{% url 'administracion:eliminar_plato' plato.id %}"
+                                            onclick="return confirm('Confirmar accion')" >
+                                            <img src="{% static 'images/trash.png' %}">
+                                        </a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

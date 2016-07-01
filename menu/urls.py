@@ -1,4 +1,6 @@
 from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 app_name = "menu"
@@ -96,5 +98,7 @@ urlpatterns = [
 	#/menu/layoutbootstrap/
 	url(r'^layoutbootstrap/$', views.layout_bootstrap, name = 'layout_bootstrap'),
 
+	url(r'^static/$', 'django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
 
-]
+
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
