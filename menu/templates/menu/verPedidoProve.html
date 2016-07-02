@@ -53,7 +53,8 @@
         </tbody>
     </table>
 
-    <a class="btn btn-default" href = "/enviar_pedido/{{ pedido.id }}">Enviar Pedido</a>
+    <a class="btn btn-default" href = "/enviar_pedido/{{ pedido.id }}"
+    	onclick="return alert('Su pedido fue enviado extosamente')">Enviar Pedido</a>
     <a class="btn btn-default" href = "{% url 'menu:notificaciones' %}">Volver</a>
 
 {% endblock %}

@@ -940,6 +940,12 @@ def PangoBros(request):
         
 def enviar_pedido(request, id_pedido):
     pedido = PEDIDOPROVEEDOR.objects.get(id=id_pedido)
+    productos = ProductoEnPedido.objects.filter(pedido = pedido)
+
+    for producto in productos:
+        inventario = Inventario.objects.get(producto = producto.producto.producto)
+        inventario.cantidad += producto.cantidad
+        inventario.save()
 
     trans = TRANSACCION(establecimiento=None,
                         billetera=None,
